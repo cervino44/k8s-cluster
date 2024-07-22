@@ -1,0 +1,64 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: github-runner-controller
+  namespace: github-system
+spec:
+  interval: 30m
+  chart:
+    spec:
+      chart: gha-runner-scale-set-controller
+      sourceRef:
+        kind: HelmRepository
+        name: github-runner
+        namespace: flux-system
+  install:
+    remediation:
+      retries: 3
+  upgrade:
+    cleanupOnFail: true
+    remediation:
+      retries: 3
+  values:
+      # leaderElection will be enabled when replicaCount>1,
+      # So, only one replica will in charge of reconciliation at a given time
+      # leaderElectionId will be set to {{ define gha-runner-scale-set-controller.fullname }}.
+      replicaCount: 1
+
+      flags:
+        updateStrategy: "immediate"
+---
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: github-runner
+  namespace: github-runners
+spec:
+  interval: 30m
+  chart:
+    spec:
+      chart: gha-runner-scale-set
+      sourceRef:
+        kind: HelmRepository
+        name: github-runner
+        namespace: flux-system
+  install:
+    remediation:
+      retries: 3
+  upgrade:
+    cleanupOnFail: true
+    remediation:
+      retries: 3
+
+  valuesFrom:
+    - kind: Secret
+      name: github-deploy-key
+      namespace: flux-system
+      valuesKey: identity
+      targetPath: githubConfigSecret
+      optional: true
+
+  values:
+      githubConfigUrl: "https://github.com/DotZero24"
+

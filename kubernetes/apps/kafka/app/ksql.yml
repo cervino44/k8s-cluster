@@ -1,0 +1,87 @@
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: kafka-ksql
+  name: kafka-ksql
+  namespace: kafka
+spec:
+  ports:
+  - name: tcp-ksql
+    port: 8088
+    protocol: TCP
+    targetPort: tcp-ksql
+  selector:
+    app: kafka-ksql
+  sessionAffinity: None
+  type: LoadBalancer
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  labels:
+    app: kafka-ksql
+  name: kafka-ksql
+  namespace: kafka
+spec:
+  podManagementPolicy: Parallel
+  replicas: 1
+  revisionHistoryLimit: 10
+  selector:
+    matchLabels:
+      app: kafka-ksql
+  serviceName: kafka-ksql
+  template:
+    metadata:
+      labels:
+        app: kafka-ksql
+    spec:
+      serviceAccountName: kafka
+      containers:
+      - env:
+        - name: SCHEMA_REGISTRY_HOST_NAME
+          valueFrom:
+            fieldRef:
+              apiVersion: v1
+              fieldPath: metadata.name
+        - name: KSQL_BOOTSTRAP_SERVERS
+          value: kafka-0.kafka-headless.kafka.svc.cluster.local:9092,kafka-1.kafka-headless.kafka.svc.cluster.local:9092,kafka-2.kafka-headless.kafka.svc.cluster.local:9092
+        - name: KSQL_LISTENERS 
+          value: "http://0.0.0.0:8088"
+        - name: KSQL_KSQL_LOGGING_PROCESSING_TOPIC_REPLICATION_FACTOR
+          value: '1'
+        name: ksql
+        image: confluentinc/cp-ksqldb-server:7.5.0
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 8088
+          name: tcp-ksql
+          protocol: TCP
+        resources:
+          limits:
+            cpu: "4"
+            memory: 2500Mi
+          requests:
+            cpu: 250m
+            memory: 512Mi
+        securityContext:
+          allowPrivilegeEscalation: false
+          capabilities:
+            drop:
+            - ALL
+          # readOnlyRootFilesystem: true
+          runAsGroup: 1000
+          runAsUser: 1000
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+        volumeMounts:
+        - mountPath: /etc/ksql
+          name: config
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext:
+        fsGroup: 1000
+      volumes:
+      - emptyDir: {}
+        name: config
