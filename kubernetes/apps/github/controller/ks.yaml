@@ -5,11 +5,11 @@ metadata:
   name: &app github-runner
   namespace: flux-system
 spec:
-  targetNamespace: flux-system
+  targetNamespace: github-system
   commonMetadata:
     labels:
       app.kubernetes.io/name: *app
-  path: ./kubernetes/apps/github/app/runner
+  path: ./kubernetes/apps/github/controller/app
   prune: true
   sourceRef:
     kind: GitRepository
