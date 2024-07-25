@@ -4,4 +4,5 @@ kind: Kustomization
 resources:
   - ./ns-system.yaml
   - ./ns-runner.yaml
-  - ./app/ks.yaml
+  - ./controller/ks.yaml
+  - ./runner/ks.yaml
