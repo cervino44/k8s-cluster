@@ -47,24 +47,26 @@ spec:
               CONTROL_CENTER_KSQL_KSQLDB1_URL: http:/ksql:8088
               CONTROL_CENTER_REPLICATION_FACTOR: 1
 
-              CONTROL_CENTER_REST_LISTENERS: http://0.0.0.0:9021
+              CONTROL_CENTER_REST_LISTENERS: http://0.0.0.0:9021,https://0.0.0.0:9022
 
               CONTROL_CENTER_INTERNAL_TOPICS_PARTITIONS: 6
               CONTROL_CENTER_MONITORING_INTERCEPTOR_TOPIC_PARTITIONS: 1
               CONFLUENT_METRICS_TOPIC_REPLICATION: 1
 
+              CUB_CLASSPATH: "/usr/share/java/confluent-control-center/*:/usr/share/java/rest-utils/*:/usr/share/java/confluent-common/*:/usr/share/java/confluent-security/kafka-rest/*:/usr/share/java/kafka-rest/:/usr/share/java/cp-base-new/*"
+
             probes:
               liveness: &probes
-                enabled: false
+                enabled: true
                 custom: true
                 spec:
                   httpGet:
                     path: /
                     port: *port
-                  initialDelaySeconds: 0
+                  initialDelaySeconds: 60
                   periodSeconds: 10
                   timeoutSeconds: 1
-                  failureThreshold: 3
+                  failureThreshold: 20
               readiness: *probes
             securityContext:
               allowPrivilegeEscalation: false
