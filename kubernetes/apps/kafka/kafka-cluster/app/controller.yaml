@@ -65,7 +65,7 @@ spec:
               - sh
               - -exc
               - |
-                export KAFKA_ADVERTISED_LISTENERS=PLAINTEXT://\${POD_NAME}.broker:9092
+                export KAFKA_ADVERTISED_LISTENERS=PLAINTEXT://$POD_NAME.broker:9092
                 exec /etc/confluent/docker/run
             securityContext:
               allowPrivilegeEscalation: false
