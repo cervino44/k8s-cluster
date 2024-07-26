@@ -24,7 +24,7 @@ spec:
     - kind: Secret
       name: github-deploy-key
       valuesKey: identity
-      targetPath: githubConfigSecret
+      targetPath: githubConfigSecret.github_token
       optional: true
 
   values:
