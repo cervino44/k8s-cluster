@@ -5,3 +5,5 @@ resources:
   - ./controller.yaml
   - ./ksql.yaml
   - ./schema-registry.yaml
+  - ./rest-proxy.yaml
+  - ./control-center.yaml
