@@ -25,7 +25,7 @@ spec:
       name: github-deploy-key
       valuesKey: identity
       targetPath: githubConfigSecret.github_token
-      optional: true
+      optional: false
 
   values:
     githubConfigUrl: "https://github.com/DotZero24"
