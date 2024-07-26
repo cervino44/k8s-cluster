@@ -9,7 +9,7 @@ spec:
   commonMetadata:
     labels:
       app.kubernetes.io/name: *app
-  path: ./kubernetes/apps/github/controller/app
+  path: ./kubernetes/apps/github-system/controller/app
   prune: true
   sourceRef:
     kind: GitRepository
