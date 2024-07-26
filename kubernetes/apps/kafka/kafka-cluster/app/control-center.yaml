@@ -1,0 +1,88 @@
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: kafka-control-center
+  name: kafka-control-center
+spec:
+  ports:
+    - name: tcp-cntl-center
+      port: 9021
+      protocol: TCP
+      targetPort: tcp-cntl-center
+  selector:
+    app: kafka-control-center
+  sessionAffinity: None
+  type: LoadBalancer
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  labels:
+    app: kafka-control-center
+  name: kafka-control-center
+spec:
+  podManagementPolicy: Parallel
+  replicas: 1
+  revisionHistoryLimit: 10
+  selector:
+    matchLabels:
+      app: kafka-control-center
+  serviceName: kafka-control-center
+  template:
+    metadata:
+      labels:
+        app: kafka-control-center
+    spec:
+      serviceAccountName: kafka
+      containers:
+        - env:
+            - name: SCHEMA_REGISTRY_HOST_NAME
+              valueFrom:
+                fieldRef:
+                  apiVersion: v1
+                  fieldPath: metadata.name
+            - name: CONTROL_CENTER_BOOTSTRAP_SERVERS
+              value: kafka-0.kafka-headless.kafka.svc.cluster.local:9092,kafka-1.kafka-headless.kafka.svc.cluster.local:9092,kafka-2.kafka-headless.kafka.svc.cluster.local:9092
+            - name: KAFKA_REST_LISTENERS
+              value: http://0.0.0.0:8082
+            - name: CONTROL_CENTER_SCHEMA_REGISTRY_URL
+              value: http://kafka-schema-registry:8082
+            - name: CONTROL_CENTER_KSQL_KSQLDB1_URL
+              value: http:/kafka-ksql:8082
+          #      CONTROL_CENTER_CONNECT_CONNECT-DEFAULT_CLUSTER: 'connect:8083'
+          name: control-center
+          image: confluentinc/cp-enterprise-control-center:7.5.0
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 9021
+              name: tcp-cntl-center
+              protocol: TCP
+          resources:
+            limits:
+              cpu: "1"
+              memory: 1400Mi
+            requests:
+              cpu: 250m
+              memory: 512Mi
+          securityContext:
+            allowPrivilegeEscalation: false
+            capabilities:
+              drop:
+                - ALL
+            # readOnlyRootFilesystem: true
+            runAsGroup: 1000
+            runAsUser: 1000
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+          volumeMounts:
+            - mountPath: /etc/kafka
+              name: config
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext:
+        fsGroup: 1000
+      volumes:
+        - emptyDir: {}
+          name: config
