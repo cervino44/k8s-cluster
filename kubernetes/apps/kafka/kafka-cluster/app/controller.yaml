@@ -34,7 +34,7 @@ spec:
           app:
             image:
               repository: confluentinc/cp-server
-              tag: 7.5.0
+              tag: 7.7.0
             env:
               KAFKA_METRIC_REPORTERS: io.confluent.metrics.reporter.ConfluentMetricsReporter
               KAFKA_CONFLUENT_METRICS_REPORTER_BOOTSTRAP_SERVERS: broker-0.broker:9092,broker-1.broker:9192,broker-2.broker:9292
