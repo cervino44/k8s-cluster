@@ -15,5 +15,3 @@ resources:
   - ./external-dns.yaml
   - ./ingress-nginx.yaml
   - ./k8s-gateway.yaml
-  - ./github-runner.yaml
-  - ./rook.yaml

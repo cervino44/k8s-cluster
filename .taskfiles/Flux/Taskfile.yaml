@@ -8,7 +8,6 @@ vars:
   GITHUB_DEPLOY_KEY_FILE: "{{.KUBERNETES_DIR}}/bootstrap/flux/github-deploy-key.sops.yaml"
 
 tasks:
-
   bootstrap:
     desc: Bootstrap Flux into a Kubernetes cluster
     cmds:
@@ -60,7 +59,10 @@ tasks:
   github-deploy-key:
     cmds:
       - kubectl create namespace flux-system --dry-run=client -o yaml | kubectl --kubeconfig {{.KUBECONFIG_FILE}} apply --filename -
-      - sops --decrypt {{.GITHUB_DEPLOY_KEY_FILE}} | kubectl apply --kubeconfig {{.KUBECONFIG_FILE}} --server-side --filename -
+      - sops --decrypt {{.GITHUB_DEPLOY_KEY_FILE}} | kubectl apply -n flux-system --kubeconfig {{.KUBECONFIG_FILE}} --server-side --filename -
+
+      - kubectl create namespace github-runner --dry-run=client -o yaml | kubectl --kubeconfig {{.KUBECONFIG_FILE}} apply --filename -
+      - sops --decrypt {{.GITHUB_DEPLOY_KEY_FILE}} | kubectl apply -n github-runner --kubeconfig {{.KUBECONFIG_FILE}} --server-side --filename -
     preconditions:
       - msg: Missing kubeconfig
         sh: test -f {{.KUBECONFIG_FILE}}
