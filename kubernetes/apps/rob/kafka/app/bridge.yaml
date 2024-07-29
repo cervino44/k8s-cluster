@@ -15,7 +15,7 @@ metadata:
 spec:
   ingressClassName: internal
   rules:
-    - host: "mario-kafka..${SECRET_DOMAIN}"
+    - host: "kafka.{{.Release.Namespace}}.${SECRET_DOMAIN}"
       http:
         paths:
           - backend:

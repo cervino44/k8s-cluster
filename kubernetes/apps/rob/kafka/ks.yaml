@@ -9,7 +9,7 @@ spec:
   commonMetadata:
     labels:
       app.kubernetes.io/name: *app
-  path: ./kubernetes/apps/mario/kafka/app
+  path: ./kubernetes/apps/rob/kafka/app
   prune: true
   sourceRef:
     kind: GitRepository
@@ -29,7 +29,7 @@ spec:
   commonMetadata:
     labels:
       app.kubernetes.io/name: *app
-  path: ./kubernetes/apps/mario/kafka/topics
+  path: ./kubernetes/apps/rob/kafka/topics
   prune: true
   sourceRef:
     kind: GitRepository
