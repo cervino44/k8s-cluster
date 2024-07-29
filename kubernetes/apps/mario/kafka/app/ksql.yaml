@@ -76,20 +76,21 @@ spec:
         ports:
           http:
             port: *port
-    # serviceMonitor:
-    #   app:
-    #     serviceName: "{{ .Release.Name }}"
-    #     endpoints:
-    #       - port: http
-    #         scheme: http
-    #         path: /metrics
-    #         interval: 1m
-    #         scrapeTimeout: 10s
+    serviceMonitor:
+      app:
+        serviceName: "{{ .Release.Name }}"
+        endpoints:
+          - port: http
+            scheme: http
+            path: /metrics
+            interval: 1m
+            scrapeTimeout: 10s
     ingress:
       app:
         className: internal
         hosts:
-          - host: "{{ .Release.Name }}.${SECRET_DOMAIN}"
+          - host: "{{ .Release.Name }}-{{.Release.Namespace}}.vegmond.net"
+            #          - host: "{{ .Release.Name }}-{{.Release.Namespace}}.${SECRET_DOMAIN}"
             paths:
               - path: /
                 pathType: Prefix

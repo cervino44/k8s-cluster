@@ -44,3 +44,14 @@ spec:
         host: conduktor-db
         name: console
         port: 5432
+    platform:
+      metrics:
+        enabled: true
+        serviceMonitor:
+          enabled: true
+    grafana:
+      enabled: false
+    ingress:
+      enabled: true
+      hostname: "konsole.${SECRET_DOMAIN}"
+      ingressClassName: internal

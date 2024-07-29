@@ -15,7 +15,7 @@ metadata:
 spec:
   ingressClassName: internal
   rules:
-    - host: mario.vegmond.net
+    - host: mario-kafka.vegmond.net
       http:
         paths:
           - backend:
