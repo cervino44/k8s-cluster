@@ -1,26 +1,26 @@
 apiVersion: kafka.strimzi.io/v1beta2
 kind: KafkaBridge
 metadata:
-  name: my-bridge
+  name: mario-bridge
 spec:
   replicas: 3
-  bootstrapServers: my-cluster-kafka-bootstrap:9092
+  bootstrapServers: mario-cluster-kafka-bootstrap:9092
   http:
     port: 8080
 ---
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: my-bridge-ingress
+  name: mario-bridge-ingress
 spec:
   ingressClassName: internal
   rules:
-    - host: "kafka-rob.${SECRET_DOMAIN}"
+    - host: "kafka-rob}.${SECRET_DOMAIN}"
       http:
         paths:
           - backend:
               service:
-                name: my-bridge-bridge-service
+                name: mario-bridge-bridge-service
                 port:
                   name: rest-api
             path: /

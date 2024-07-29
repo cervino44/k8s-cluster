@@ -38,7 +38,7 @@ spec:
                   fieldRef:
                     apiVersion: v1
                     fieldPath: metadata.name
-              SCHEMA_REGISTRY_KAFKASTORE_BOOTSTRAP_SERVERS: my-cluster-kafka-bootstrap:9092
+              SCHEMA_REGISTRY_KAFKASTORE_BOOTSTRAP_SERVERS: mario-cluster-kafka-bootstrap:9092
               SCHEMA_REGISTRY_LISTENERS: http://0.0.0.0:8081
             probes:
               liveness: &probes

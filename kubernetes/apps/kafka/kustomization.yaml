@@ -4,4 +4,4 @@ kind: Kustomization
 resources:
   - ./namespace.yaml
   - ./strimzi/ks.yaml
-  - ./kafka-cluster/ks.yaml
+  # - ./kafka-cluster/ks.yaml

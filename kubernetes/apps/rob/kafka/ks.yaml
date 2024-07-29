@@ -9,7 +9,7 @@ spec:
   commonMetadata:
     labels:
       app.kubernetes.io/name: *app
-  path: ./kubernetes/apps/rob/kafka/app
+  path: ./kubernetes/apps/rob/kafka/cluster
   prune: true
   sourceRef:
     kind: GitRepository

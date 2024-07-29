@@ -3,7 +3,7 @@ kind: KafkaNodePool
 metadata:
   name: controller
   labels:
-    strimzi.io/cluster: my-cluster
+    strimzi.io/cluster: mario-cluster
 spec:
   replicas: 3
   roles:
@@ -21,7 +21,7 @@ kind: KafkaNodePool
 metadata:
   name: broker
   labels:
-    strimzi.io/cluster: my-cluster
+    strimzi.io/cluster: mario-cluster
 spec:
   replicas: 0
   roles:
@@ -36,7 +36,7 @@ spec:
 apiVersion: kafka.strimzi.io/v1beta2
 kind: Kafka
 metadata:
-  name: my-cluster
+  name: mario-cluster
   annotations:
     strimzi.io/node-pools: enabled
     strimzi.io/kraft: enabled
