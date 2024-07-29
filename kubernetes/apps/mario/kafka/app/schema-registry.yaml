@@ -87,8 +87,7 @@ spec:
       app:
         className: internal
         hosts:
-          - host: "{{ .Release.Name }}-{{.Release.Namespace}}.vegmond.net"
-            #          - host: "{{ .Release.Name }}.${SECRET_DOMAIN}"
+          - host: "{{ .Release.Name }}-{{.Release.Namespace}}.${SECRET_DOMAIN}"
             paths:
               - path: /
                 pathType: Prefix
