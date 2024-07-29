@@ -15,7 +15,7 @@ metadata:
 spec:
   ingressClassName: internal
   rules:
-    - host: "kafka.{{.Release.Namespace}}.${SECRET_DOMAIN}"
+    - host: "kafka-rob.${SECRET_DOMAIN}"
       http:
         paths:
           - backend:
