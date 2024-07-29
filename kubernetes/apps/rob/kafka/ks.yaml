@@ -5,7 +5,7 @@ metadata:
   name: &app kafka-cluster-rob
   namespace: flux-system
 spec:
-  targetNamespace: kafka
+  targetNamespace: rob
   commonMetadata:
     labels:
       app.kubernetes.io/name: *app
@@ -25,7 +25,7 @@ metadata:
   name: &app kafka-topics-rob
   namespace: flux-system
 spec:
-  targetNamespace: kafka
+  targetNamespace: rob
   commonMetadata:
     labels:
       app.kubernetes.io/name: *app
