@@ -5,7 +5,7 @@ metadata:
   name: &app postgres-operator
   namespace: flux-system
 spec:
-  targetNamespace: kafka
+  targetNamespace: database
   commonMetadata:
     labels:
       app.kubernetes.io/name: *app
@@ -25,7 +25,7 @@ metadata:
   name: &app postgres-operator-ui
   namespace: flux-system
 spec:
-  targetNamespace: kafka
+  targetNamespace: database
   commonMetadata:
     labels:
       app.kubernetes.io/name: *app
