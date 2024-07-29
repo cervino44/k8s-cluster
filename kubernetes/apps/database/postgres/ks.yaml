@@ -9,7 +9,7 @@ spec:
   commonMetadata:
     labels:
       app.kubernetes.io/name: *app
-  path: ./kubernetes/apps/database/postgress/operator
+  path: ./kubernetes/apps/database/postgres/operator
   prune: true
   sourceRef:
     kind: GitRepository
@@ -29,7 +29,7 @@ spec:
   commonMetadata:
     labels:
       app.kubernetes.io/name: *app
-  path: ./kubernetes/apps/database/postgress/operator-ui
+  path: ./kubernetes/apps/database/postgres/operator-ui
   prune: true
   sourceRef:
     kind: GitRepository
