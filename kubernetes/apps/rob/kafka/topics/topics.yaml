@@ -51,29 +51,32 @@ spec:
 apiVersion: kafka.strimzi.io/v1beta2
 kind: KafkaTopic
 metadata:
-  name: network_configuration
+  name: network-configuration
   labels:
     strimzi.io/cluster: mario-cluster
 spec:
+  topicName: network_configuration
   partitions: 12
   replicas: 3
 ---
 apiVersion: kafka.strimzi.io/v1beta2
 kind: KafkaTopic
 metadata:
-  name: network_diagram
+  name: network-diagram
   labels:
     strimzi.io/cluster: mario-cluster
 spec:
+  topicName: network_diagram
   partitions: 12
   replicas: 3
 ---
 apiVersion: kafka.strimzi.io/v1beta2
 kind: KafkaTopic
 metadata:
-  name: network_table
+  name: network-table
   labels:
     strimzi.io/cluster: mario-cluster
 spec:
+  topicName: network_table
   partitions: 12
   replicas: 3
