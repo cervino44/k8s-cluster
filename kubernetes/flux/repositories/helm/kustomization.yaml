@@ -20,3 +20,4 @@ resources:
   - ./elastic.yaml
   - ./zalando.yaml
   - ./strimzi.yaml
+  - ./github-runner.yaml
