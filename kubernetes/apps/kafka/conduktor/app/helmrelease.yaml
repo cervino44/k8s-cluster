@@ -1,0 +1,46 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: console
+spec:
+  interval: 30m
+  chart:
+    spec:
+      chart: console
+      version: 1.10.0
+      sourceRef:
+        kind: HelmRepository
+        name: conduktor
+        namespace: flux-system
+  install:
+    remediation:
+      retries: 3
+  upgrade:
+    cleanupOnFail: true
+    remediation:
+      retries: 3
+
+  valuesFrom:
+    - kind: Secret
+      name: conduktor.conduktor-db.credentials.postgresql.acid.zalan.do
+      valuesKey: password
+      targetPath: config.database.password
+      optional: false
+    - kind: Secret
+      name: conduktor.conduktor-db.credentials.postgresql.acid.zalan.do
+      valuesKey: username
+      targetPath: config.database.username
+      optional: false
+
+  values:
+    config:
+      organization:
+        name: mario
+      admin:
+        email: "a@b.com"
+        password: "admin"
+      database:
+        host: conduktor-db
+        name: console
+        port: 5432

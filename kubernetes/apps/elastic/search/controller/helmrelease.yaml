@@ -5,10 +5,10 @@ metadata:
 spec:
   chart:
     spec:
-      chart: elastic
+      chart: eck-operator
       interval: 30m
       sourceRef:
         kind: HelmRepository
-        name: eck-operator
+        name: elastic
         namespace: flux-system
   interval: 30m

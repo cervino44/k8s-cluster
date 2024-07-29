@@ -15,3 +15,8 @@ resources:
   - ./external-dns.yaml
   - ./ingress-nginx.yaml
   - ./k8s-gateway.yaml
+  - ./conduktor.yaml
+  - ./rook.yaml
+  - ./elastic.yaml
+  - ./zalando.yaml
+  - ./strimzi.yaml
