@@ -5,7 +5,7 @@ metadata:
   name: &app strimzi-operator
   namespace: flux-system
 spec:
-  targetNamespace: kafka
+  targetNamespace: kafka-system
   commonMetadata:
     labels:
       app.kubernetes.io/name: *app
