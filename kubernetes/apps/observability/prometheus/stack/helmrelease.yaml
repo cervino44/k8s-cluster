@@ -23,7 +23,7 @@ spec:
   values:
     alertmanager:
       ingress:
-        enabled: false
+        enabled: true
         ingressClassName: internal
         hosts:
           - "alertmanager.${SECRET_DOMAIN}"
@@ -31,7 +31,7 @@ spec:
           - /
     grafana:
       ingress:
-        enabled: false
+        enabled: true
         ingressClassName: internal
         hosts:
           - "grafana.${SECRET_DOMAIN}"
@@ -39,7 +39,7 @@ spec:
           - /
     prometheus:
       ingress:
-        enabled: false
+        enabled: true
         ingressClassName: internal
         hosts:
           - "prometheus.${SECRET_DOMAIN}"
