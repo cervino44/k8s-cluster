@@ -87,12 +87,14 @@ spec:
             scrapeTimeout: 10s
     ingress:
       app:
+        annotations:
+          nginx.ingress.kubernetes.io/rewrite-target: /$2
         className: internal
         hosts:
-          - host: "{{ .Release.Name }}-{{.Release.Namespace}}.${SECRET_DOMAIN}"
+          - host: "{{ .Release.Name }}.${SECRET_DOMAIN}"
             paths:
-              - path: /
-                pathType: Prefix
+              - path: /{{.Release.Namespace}}(/|$)(.*)
+                pathType: ApplicationSpecific
                 service:
                   identifier: app
                   port: http
