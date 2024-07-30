@@ -3,7 +3,7 @@ kind: KafkaBridge
 metadata:
   name: mario
 spec:
-  replicas: 1
+  replicas: 5
   image: quay.io/strimzi/kafka-bridge:latest-amd64
   bootstrapServers: mario-cluster-kafka-bootstrap:9092
   http:
