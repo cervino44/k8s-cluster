@@ -1,7 +1,7 @@
 apiVersion: kafka.strimzi.io/v1beta2
 kind: KafkaBridge
 metadata:
-  name: mario-bridge
+  name: mario
 spec:
   replicas: 1
   bootstrapServers: mario-cluster-kafka-bootstrap:9092
@@ -22,7 +22,37 @@ spec:
         paths:
           - backend:
               service:
-                name: mario-bridge-bridge-service
+                name: mario-bridge-service
+                port:
+                  name: rest-api
+            path: /rob(/|$)(.*)
+            pathType: ImplementationSpecific
+---
+apiVersion: kafka.strimzi.io/v1beta2
+kind: KafkaBridge
+metadata:
+  name: leffe
+spec:
+  replicas: 1
+  bootstrapServers: mario-cluster-kafka-bootstrap:9092
+  http:
+    port: 8080
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: mario-bridge-ingress
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /$2
+spec:
+  ingressClassName: internal
+  rules:
+    - host: "leffe.${SECRET_DOMAIN}"
+      http:
+        paths:
+          - backend:
+              service:
+                name: leffe-bridge-service
                 port:
                   name: rest-api
             path: /rob(/|$)(.*)
