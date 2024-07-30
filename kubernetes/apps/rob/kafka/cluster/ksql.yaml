@@ -94,7 +94,7 @@ spec:
           - host: "{{ .Release.Name }}.${SECRET_DOMAIN}"
             paths:
               - path: /{{.Release.Namespace}}(/|$)(.*)
-                pathType: ApplicationSpecific
+                pathType: ImplementationSpecific
                 service:
                   identifier: app
                   port: http
