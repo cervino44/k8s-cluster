@@ -4,6 +4,6 @@ kind: Kustomization
 resources:
   - ./bridge.yaml
   - ./cluster.yaml
-  - ./cruise-control.yaml
+  #- ./cruise-control.yaml
   - ./ksql.yaml
   - ./schema-registry.yaml

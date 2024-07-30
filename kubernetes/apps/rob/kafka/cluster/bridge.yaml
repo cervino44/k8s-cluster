@@ -12,10 +12,12 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: mario-bridge-ingress
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /$2
 spec:
   ingressClassName: internal
   rules:
-    - host: "kafka-rob.${SECRET_DOMAIN}"
+    - host: "kafka.${SECRET_DOMAIN}"
       http:
         paths:
           - backend:
@@ -23,5 +25,5 @@ spec:
                 name: mario-bridge-bridge-service
                 port:
                   name: rest-api
-            path: /
+            path: /rob(/|$)(.*)
             pathType: Prefix

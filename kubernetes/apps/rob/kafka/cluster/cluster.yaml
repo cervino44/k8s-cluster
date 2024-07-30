@@ -13,8 +13,10 @@ spec:
     type: jbod
     volumes:
       - id: 0
-        type: ephemeral
-        kraftMetadata: shared
+        type: persistent-claim
+        size: 100Gi
+        deleteClaim: false
+
 ---
 apiVersion: kafka.strimzi.io/v1beta2
 kind: KafkaNodePool
@@ -30,8 +32,9 @@ spec:
     type: jbod
     volumes:
       - id: 0
-        type: ephemeral
-        kraftMetadata: shared
+        type: persistent-claim
+        size: 100Gi
+        deleteClaim: false
 ---
 apiVersion: kafka.strimzi.io/v1beta2
 kind: Kafka
