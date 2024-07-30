@@ -11,7 +11,7 @@ spec:
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: mario-bridge-ingress
+  name: mario-ingress
   annotations:
     nginx.ingress.kubernetes.io/rewrite-target: /$2
 spec:
@@ -41,7 +41,7 @@ spec:
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: mario-bridge-ingress
+  name: leffe-ingress
   annotations:
     nginx.ingress.kubernetes.io/rewrite-target: /$2
 spec:
