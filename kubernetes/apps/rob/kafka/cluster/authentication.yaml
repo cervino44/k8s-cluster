@@ -1,8 +1,0 @@
----
-apiVersion: v1
-stringData:
-  foo: $apr1$bJ9cgClG$f7GwkqJa0qJjZqNr2SwJW.
-kind: Secret
-metadata:
-  name: basic-auth
-type: Opaque

@@ -8,4 +8,4 @@ resources:
   - ./ksql.yaml
   - ./schema-registry.yaml
   - ./rest-proxy.yaml
-  - ./authentication.yaml
+  - ./authentication.sops.yaml

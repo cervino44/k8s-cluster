@@ -98,7 +98,7 @@ spec:
           # type of authentication
           nginx.ingress.kubernetes.io/auth-type: digest
           # name of the secret that contains the user/password definitions
-          nginx.ingress.kubernetes.io/auth-secret: basic-auth
+          nginx.ingress.kubernetes.io/auth-secret: digest-auth
 
           nginx.ingress.kubernetes.io/auth-secret-type: auth-map
 
