@@ -2,7 +2,7 @@
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
-  name: ksql
+  name: schema
 spec:
   interval: 30m
   chart:
@@ -30,18 +30,16 @@ spec:
         containers:
           app:
             image:
-              repository: confluentinc/cp-ksqldb-server
+              repository: confluentinc/cp-schema-registry
               tag: 7.5.0
             env:
-              KSQL_HOST_NAME:
+              SCHEMA_REGISTRY_HOST_NAME:
                 valueFrom:
                   fieldRef:
                     apiVersion: v1
                     fieldPath: metadata.name
-              KSQL_BOOTSTRAP_SERVERS: mario-cluster-kafka-bootstrap:9092
-              KSQL_LISTENERS: "http://0.0.0.0:8088"
-              KSQL_KSQL_LOGGING_PROCESSING_TOPIC_REPLICATION_FACTOR: 1
-              KSQL_KSQL_SERVICE_ID: "default_"
+              SCHEMA_REGISTRY_KAFKASTORE_BOOTSTRAP_SERVERS: mario-cluster-kafka-bootstrap:9092
+              SCHEMA_REGISTRY_LISTENERS: http://0.0.0.0:8081
             probes:
               liveness: &probes
                 enabled: true
@@ -49,7 +47,7 @@ spec:
                 spec:
                   httpGet:
                     path: /
-                    port: &port 8088
+                    port: &port 8081
                   initialDelaySeconds: 0
                   periodSeconds: 10
                   timeoutSeconds: 1
