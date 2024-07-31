@@ -96,11 +96,14 @@ spec:
           nginx.ingress.kubernetes.io/rewrite-target: /$2
 
           # type of authentication
-          nginx.ingress.kubernetes.io/auth-type: basic
+          nginx.ingress.kubernetes.io/auth-type: digest
           # name of the secret that contains the user/password definitions
           nginx.ingress.kubernetes.io/auth-secret: basic-auth
+
+          nginx.ingress.kubernetes.io/auth-secret-type: auth-map
+
           # message to display with an appropriate context why the authentication is required
-          nginx.ingress.kubernetes.io/auth-realm: "Authentication Required - foo"
+          nginx.ingress.kubernetes.io/auth-realm: "Authentication Required"
         className: internal
         hosts:
           - host: "kafka.${SECRET_DOMAIN}"
@@ -110,11 +113,3 @@ spec:
                 service:
                   identifier: app
                   port: http
----
-apiVersion: v1
-data:
-  auth: Zm9vOiRhcHIxJE9GRzNYeWJwJGNrTDBGSERBa29YWUlsSDkuY3lzVDAK
-kind: Secret
-metadata:
-  name: basic-auth
-type: Opaque
