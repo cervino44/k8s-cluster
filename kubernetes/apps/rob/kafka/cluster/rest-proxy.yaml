@@ -108,7 +108,7 @@ spec:
 
         className: external
         hosts:
-          - host: kafka.${SECRET_DOMAIN}"
+          - host: "kafka.${SECRET_DOMAIN}"
             paths:
               - path: "/{{.Release.Namespace}}(/|$)(.*)"
                 pathType: ImplementationSpecific
