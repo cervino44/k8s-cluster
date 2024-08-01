@@ -97,9 +97,9 @@ spec:
 
         className: external
         hosts:
-          - host: "{{ .Release.Name }}-{{.Release.Namespace}}.${SECRET_DOMAIN}"
+          - host: "{{ .Release.Name }}.${SECRET_DOMAIN}"
             paths:
-              - path: /
+              - path: "/{{.Release.Namespace}}(/|$)(.*)"
                 service:
                   identifier: app
                   port: http
