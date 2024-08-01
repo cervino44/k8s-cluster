@@ -92,7 +92,7 @@ spec:
           # nginx.ingress.kubernetes.io/session-cookie-name: "routing-cookie"
           # nginx.ingress.kubernetes.io/session-cookie-expires: "172800"
           # nginx.ingress.kubernetes.io/session-cookie-max-age: "172800"
-          # nginx.ingress.kubernetes.io/rewrite-target: /$2
+          nginx.ingress.kubernetes.io/rewrite-target: /$2
 
           # # type of authentication
           # nginx.ingress.kubernetes.io/auth-type: basic
