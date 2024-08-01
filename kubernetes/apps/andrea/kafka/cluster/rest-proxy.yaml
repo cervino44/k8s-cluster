@@ -107,9 +107,9 @@ spec:
 
         className: external
         hosts:
-          - host: "kafka.${SECRET_DOMAIN}"
+          - host: "kafka-{{.Release.Namespace}}.${SECRET_DOMAIN}"
             paths:
-              - path: "/{{.Release.Namespace}}(/|$)(.*)"
+              - path: /
                 service:
                   identifier: app
                   port: http

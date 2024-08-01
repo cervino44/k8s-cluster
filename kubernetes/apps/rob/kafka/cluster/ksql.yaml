@@ -83,7 +83,7 @@ spec:
     ingress:
       app:
         annotations:
-          nginx.ingress.kubernetes.io/rewrite-target: /$2
+          #nginx.ingress.kubernetes.io/rewrite-target: /$2
 
           # type of authentication
           nginx.ingress.kubernetes.io/auth-type: basic
@@ -96,9 +96,9 @@ spec:
 
         className: external
         hosts:
-          - host: "{{ .Release.Name }}.${SECRET_DOMAIN}"
+          - host: "{{ .Release.Name }}-{{.Release.Namespace}}.${SECRET_DOMAIN}"
             paths:
-              - path: /{{.Release.Namespace}}(/|$)(.*)
+              - path: /
                 pathType: ImplementationSpecific
                 service:
                   identifier: app
