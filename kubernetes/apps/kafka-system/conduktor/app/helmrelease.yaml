@@ -54,4 +54,4 @@ spec:
     ingress:
       enabled: true
       hostname: "konsole.${SECRET_DOMAIN}"
-      ingressClassName: internal
+      ingressClassName: external

@@ -92,7 +92,7 @@ spec:
           # message to display with an appropriate context why the authentication is required
           nginx.ingress.kubernetes.io/auth-realm: "Authentication Required"
 
-        className: internal
+        className: external
         hosts:
           - host: "{{ .Release.Name }}.${SECRET_DOMAIN}"
             paths:
