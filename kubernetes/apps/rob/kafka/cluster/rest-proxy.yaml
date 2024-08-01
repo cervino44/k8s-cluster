@@ -95,7 +95,7 @@ spec:
           nginx.ingress.kubernetes.io/rewrite-target: /$2
 
           # type of authentication
-          nginx.ingress.kubernetes.io/auth-type: digest
+          nginx.ingress.kubernetes.io/auth-type: basic
           # name of the secret that contains the user/password definitions
           nginx.ingress.kubernetes.io/auth-secret: digest-auth
 
