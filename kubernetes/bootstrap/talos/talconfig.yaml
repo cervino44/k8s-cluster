@@ -39,7 +39,7 @@ nodes:
         vip:
           ip: "192.168.23.2"
   - hostname: "talos1"
-    ipAddress: "192.168.23.203"
+    ipAddress: "192.168.23.11"
     installDisk: "/dev/sda"
     talosImageURL: factory.talos.dev/installer/ce4c980550dd2ab1b17bbf2b08801c7eb59418eafe8f279833297925d67c7515
     controlPlane: true
@@ -48,7 +48,7 @@ nodes:
           hardwareAddr: "bc:24:11:ec:35:05"
         dhcp: false
         addresses:
-          - "192.168.23.203/24"
+          - "192.168.23.11/24"
         routes:
           - network: 0.0.0.0/0
             gateway: "192.168.23.1"
@@ -56,7 +56,7 @@ nodes:
         vip:
           ip: "192.168.23.2"
   - hostname: "talos2"
-    ipAddress: "192.168.23.47"
+    ipAddress: "192.168.23.12"
     installDisk: "/dev/sda"
     talosImageURL: factory.talos.dev/installer/ce4c980550dd2ab1b17bbf2b08801c7eb59418eafe8f279833297925d67c7515
     controlPlane: true
@@ -65,7 +65,7 @@ nodes:
           hardwareAddr: "bc:24:11:47:9e:6b"
         dhcp: false
         addresses:
-          - "192.168.23.47/24"
+          - "192.168.23.12/24"
         routes:
           - network: 0.0.0.0/0
             gateway: "192.168.23.1"
@@ -73,7 +73,7 @@ nodes:
         vip:
           ip: "192.168.23.2"
   - hostname: "talos3"
-    ipAddress: "192.168.23.35"
+    ipAddress: "192.168.23.13"
     installDisk: "/dev/sda"
     talosImageURL: factory.talos.dev/installer/ce4c980550dd2ab1b17bbf2b08801c7eb59418eafe8f279833297925d67c7515
     controlPlane: false
@@ -82,13 +82,13 @@ nodes:
           hardwareAddr: "bc:24:11:3e:44:77"
         dhcp: false
         addresses:
-          - "192.168.23.35/24"
+          - "192.168.23.13/24"
         routes:
           - network: 0.0.0.0/0
             gateway: "192.168.23.1"
         mtu: 1500
   - hostname: "talos4"
-    ipAddress: "192.168.23.184"
+    ipAddress: "192.168.23.14"
     installDisk: "/dev/sda"
     talosImageURL: factory.talos.dev/installer/ce4c980550dd2ab1b17bbf2b08801c7eb59418eafe8f279833297925d67c7515
     controlPlane: false
@@ -97,7 +97,7 @@ nodes:
           hardwareAddr: "bc:24:11:a4:33:bd"
         dhcp: false
         addresses:
-          - "192.168.23.104/24"
+          - "192.168.23.14/24"
         routes:
           - network: 0.0.0.0/0
             gateway: "192.168.23.1"
