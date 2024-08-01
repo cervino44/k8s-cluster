@@ -91,6 +91,7 @@ spec:
 
           # message to display with an appropriate context why the authentication is required
           nginx.ingress.kubernetes.io/auth-realm: "Authentication Required"
+          external-dns.alpha.kubernetes.io/target: "external.${SECRET_DOMAIN}"
 
         className: external
         hosts:
