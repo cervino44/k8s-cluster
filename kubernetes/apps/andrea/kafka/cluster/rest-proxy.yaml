@@ -110,7 +110,6 @@ spec:
           - host: "kafka.${SECRET_DOMAIN}"
             paths:
               - path: "/{{.Release.Namespace}}(/|$)(.*)"
-                pathType: ImplementationSpecific
                 service:
                   identifier: app
                   port: http
