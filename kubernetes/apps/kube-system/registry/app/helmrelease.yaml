@@ -34,7 +34,7 @@ spec:
               tag: 2
             env:
               REGISTRY_AUTH_HTPASSWD_REALM: "Docker Registry Realm"
-              REGISTRY_AUTH_HTPASSWD_PATH: /htpasswd/htpaaswd
+              REGISTRY_AUTH_HTPASSWD_PATH: /htpasswd/htpasswd
               REGISTRY_AUTH: htpasswd
 
             probes:
