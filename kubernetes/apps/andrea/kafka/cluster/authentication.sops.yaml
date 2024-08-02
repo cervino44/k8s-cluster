@@ -1,0 +1,27 @@
+apiVersion: v1
+stringData:
+    bGsxXJ4H1eH3dEuZqqUhMb6oQHJb6H64uEYQwW7WwnjHUsO4y400hiCWziC6hj74: ENC[AES256_GCM,data:UMzRhLVRRMN4ArkLFm+41+ArcMbQBPP405yEyXueygCA7+H1Pw==,iv:Vhg36kur9yL7u9+iJxuSVYnNQpPGF1X2dcGaQg33o/U=,tag:FmQ96tXVsMR43/YI7NMKmQ==,type:str]
+kind: Secret
+metadata:
+    name: digest-auth
+type: Opaque
+sops:
+    kms: []
+    gcp_kms: []
+    azure_kv: []
+    hc_vault: []
+    age:
+        - recipient: age1mpprfpndatzrv5e8hzt6wfwtc24tlawwagkx7x8hkwfxgluspsysafpuvv
+          enc: |
+            -----BEGIN AGE ENCRYPTED FILE-----
+            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBicFhMYXQxQ21oeHZpa3Y1
+            TlFnbk5veHRJUmdjUGY2ZTlWYzd5ZWhEZGdNCndjaTlJZW5sdXUzQTRvNXVFM2d5
+            R0FGSExkdHFKME81cnVGdFh0YTd3NmcKLS0tIFM4a3dJcGZtMkw2S0xMK0p4Rktj
+            d3dGbm4rZ3FjVEFXL3ZKcndVazBVaEkKTny63veHrHtPsdqOp3fql9GZLNLvLciC
+            LPM7YCleWKQuh/3+qBuaJo0TT6kVQ6wgZXIsk/PBdoJb6Id8OLwp0g==
+            -----END AGE ENCRYPTED FILE-----
+    lastmodified: "2024-07-31T08:54:27Z"
+    mac: ENC[AES256_GCM,data:eyQAOLnBsWZQXES+yjUVGYxFhYwRNXwlR4QhCeP2wE8ezGUnGAfRafrdH4oj07ZCPvwi41+G+4jSaFF35buoPONF1/noRtmL3BUVnfsuLL0IG2a/ffiJBfmZL3XHE8fQTDLElCY/kgTiiOUHcWBkIlLCGqlvrmjbnItAa7RzabI=,iv:ZKkRTwmR0n6ucp/oTX3RpTO6dSzJEUkAB978anbgckQ=,tag:SZ8I2i4Juo7H0kCPdOG4Uw==,type:str]
+    pgp: []
+    encrypted_regex: ^(data|stringData)$
+    version: 3.9.0
