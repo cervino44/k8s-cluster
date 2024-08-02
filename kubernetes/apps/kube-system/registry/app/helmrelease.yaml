@@ -32,10 +32,6 @@ spec:
             image:
               repository: registry
               tag: 2
-            env:
-              REGISTRY_AUTH_HTPASSWD_REALM: "Docker Registry Realm"
-              REGISTRY_AUTH_HTPASSWD_PATH: /htpasswd/htpasswd
-              REGISTRY_AUTH: htpasswd
 
             probes:
               liveness: &probes
@@ -54,7 +50,6 @@ spec:
               allowPrivilegeEscalation: false
               readOnlyRootFilesystem: false
               capabilities: { drop: ["ALL"] }
-
     persistence:
       library:
         enabled: true
@@ -63,13 +58,6 @@ spec:
         size: 160Gi
         globalMounts:
           - path: /var/lib/registry
-      htpasswd:
-        enabled: true
-        type: secret
-        name: htpasswd
-        globalMounts:
-          - path: /htpasswd
-
     defaultPodOptions:
       securityContext:
         runAsNonRoot: true
@@ -93,9 +81,7 @@ spec:
             scrapeTimeout: 10s
     ingress:
       app:
-        annotations:
-          external-dns.alpha.kubernetes.io/target: "external.${SECRET_DOMAIN}"
-        className: external
+        className: internal
         hosts:
           - host: "{{.Release.Name}}.${SECRET_DOMAIN}"
             paths:
