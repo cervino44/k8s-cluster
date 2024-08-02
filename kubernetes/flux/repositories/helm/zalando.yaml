@@ -1,0 +1,20 @@
+---
+apiVersion: source.toolkit.fluxcd.io/v1
+kind: HelmRepository
+metadata:
+  name: postgres-operator
+  namespace: flux-system
+spec:
+  interval: 5m
+  url: https://opensource.zalando.com/postgres-operator/charts/postgres-operator
+---
+
+---
+apiVersion: source.toolkit.fluxcd.io/v1
+kind: HelmRepository
+metadata:
+  name: postgres-operator-ui
+  namespace: flux-system
+spec:
+  interval: 5m
+  url: https://opensource.zalando.com/postgres-operator/charts/postgres-operator-ui
