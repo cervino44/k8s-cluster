@@ -21,3 +21,4 @@ resources:
   - ./zalando.yaml
   - ./strimzi.yaml
   - ./github-runner.yaml
+  - ./jupyterhub.yaml
