@@ -24,14 +24,14 @@ spec:
     controllers:
       main:
         replicas: 1
-        strategy: RollingUpdate
+        strategy: Recreate
         annotations:
           reloader.stakater.com/auto: "true"
         containers:
           app:
             image:
               repository: confluentinc/cp-schema-registry
-              tag: 7.5.0
+              tag: 7.7.0
             env:
               SCHEMA_REGISTRY_HOST_NAME:
                 valueFrom:
