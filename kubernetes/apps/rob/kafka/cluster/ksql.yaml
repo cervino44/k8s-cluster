@@ -42,6 +42,7 @@ spec:
               KSQL_LISTENERS: "http://0.0.0.0:8088"
               KSQL_KSQL_LOGGING_PROCESSING_TOPIC_REPLICATION_FACTOR: 1
               KSQL_KSQL_SERVICE_ID: "default_"
+              KAFKA_CONFLUENT_SUPPORT_METRICS_ENABLE: false
             probes:
               liveness: &probes
                 enabled: true

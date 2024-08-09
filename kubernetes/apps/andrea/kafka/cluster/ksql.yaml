@@ -31,7 +31,7 @@ spec:
           app:
             image:
               repository: confluentinc/cp-ksqldb-server
-              tag: 7.5.0
+              tag: 7.7.0
             env:
               KSQL_HOST_NAME:
                 valueFrom:
@@ -42,6 +42,7 @@ spec:
               KSQL_LISTENERS: "http://0.0.0.0:8088"
               KSQL_KSQL_LOGGING_PROCESSING_TOPIC_REPLICATION_FACTOR: 1
               KSQL_KSQL_SERVICE_ID: "default_"
+              KAFKA_CONFLUENT_SUPPORT_METRICS_ENABLE: false
             probes:
               liveness: &probes
                 enabled: true
