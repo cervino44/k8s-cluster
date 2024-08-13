@@ -84,7 +84,7 @@ spec:
 apiVersion: kafka.strimzi.io/v1beta2
 kind: KafkaTopic
 metadata:
-  name: performance
+  name: trigger-diagrams
   labels:
     strimzi.io/cluster: mario-cluster
 spec:
