@@ -62,7 +62,7 @@ spec:
 apiVersion: kafka.strimzi.io/v1beta2
 kind: KafkaTopic
 metadata:
-  name: network-diagram
+  name: network_clients_inventory
   labels:
     strimzi.io/cluster: mario-cluster
 spec:
@@ -73,7 +73,7 @@ spec:
 apiVersion: kafka.strimzi.io/v1beta2
 kind: KafkaTopic
 metadata:
-  name: network-table
+  name: network_devices_inventory
   labels:
     strimzi.io/cluster: mario-cluster
 spec:
