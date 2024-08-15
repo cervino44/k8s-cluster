@@ -44,7 +44,7 @@ spec:
 
     initImage:
       repository: aerospike/aerospike-kubernetes-init
-      tag: 2.1.1
+      tag: 2.2.1
 
     aerospikeNamespace: "mario"
     aerospikeNamespaceMemoryGB: "10"
@@ -55,6 +55,10 @@ spec:
     aerospikeHeartbeatPort: 3002
     aerospikeFabricPort: 3001
     aerospikeInfoPort: 3003
+
+    autoRolloutConfig: true
+
+    antiAffinity: "on"
 
     nodePortServices:
       enabled: true
