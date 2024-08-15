@@ -64,21 +64,22 @@ spec:
       enabled: true
 
     persistenceStorage:
-      - mountPath: /opt/aerospike/data
-        enabled: true
-        name: datadir
-        storageClass: csi-rbd-sc
-        accessMode: ReadWriteOnce
-        volumeMode: Filesystem
-        size: 15Gi
-      - devicePath: /dev/sdb
-        enabled: true
-        name: data-dev
-        storageClass: csi-rbd-sc
-        accessMode: ReadWriteOnce
-        size: 15Gi
-        volumeMode: Block
+      {}
+      # - mountPath: /opt/aerospike/data
+      #   enabled: true
+      #   name: datadir
+      #   storageClass: csi-rbd-sc
+      #   accessMode: ReadWriteOnce
+      #   volumeMode: Filesystem
+      #   size: 15Gi
+      # - devicePath: /dev/sdb
+      #   enabled: true
+      #   name: data-dev
+      #   storageClass: csi-rbd-sc
+      #   accessMode: ReadWriteOnce
+      #   size: 15Gi
+      #   volumeMode: Block
 
-    volumes: []
+    # volumes: {}
 
     enableAerospikePrometheusExporter: true
