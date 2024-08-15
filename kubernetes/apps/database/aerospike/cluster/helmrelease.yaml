@@ -21,9 +21,9 @@ spec:
     remediation:
       retries: 3
   values:
-    dbReplicas: 3 # Also controls number of nodes in the aerospike cluster.
+    #    dbReplicas: 3 # Also controls number of nodes in the aerospike cluster.
 
-    terminationGracePeriodSeconds: 600
+    #   terminationGracePeriodSeconds: 600
 
     # livenessProbe:
     #   initialDelaySeconds: 30
@@ -46,48 +46,48 @@ spec:
       repository: aerospike/aerospike-kubernetes-init
       tag: 2.2.1
 
-    aerospikeNamespace: "mario"
-    aerospikeNamespaceMemoryGB: "10"
-    aerospikeReplicationFactor: "3"
-    aerospikeDefaultTTL: "0"
+    # aerospikeNamespace: "mario"
+    # aerospikeNamespaceMemoryGB: "10"
+    # aerospikeReplicationFactor: "3"
+    # aerospikeDefaultTTL: "0"
 
-    aerospikeClientPort: 3000
-    aerospikeHeartbeatPort: 3002
-    aerospikeFabricPort: 3001
-    aerospikeInfoPort: 3003
+    # aerospikeClientPort: 3000
+    # aerospikeHeartbeatPort: 3002
+    # aerospikeFabricPort: 3001
+    # aerospikeInfoPort: 3003
 
-    autoRolloutConfig: true
+    # autoRolloutConfig: true
 
-    antiAffinity: "on"
+    # antiAffinity: "on"
 
-    nodePortServices:
-      enabled: true
+    # nodePortServices:
+    #   enabled: true
 
-    persistenceStorage:
-      {}
-      # - mountPath: /opt/aerospike/data
-      #   enabled: true
-      #   name: datadir
-      #   storageClass: csi-rbd-sc
-      #   accessMode: ReadWriteOnce
-      #   volumeMode: Filesystem
-      #   size: 15Gi
-      # - devicePath: /dev/sdb
-      #   enabled: true
-      #   name: data-dev
-      #   storageClass: csi-rbd-sc
-      #   accessMode: ReadWriteOnce
-      #   size: 15Gi
-      #   volumeMode: Block
+    # persistenceStorage:
+    #   {}
+    # - mountPath: /opt/aerospike/data
+    #   enabled: true
+    #   name: datadir
+    #   storageClass: csi-rbd-sc
+    #   accessMode: ReadWriteOnce
+    #   volumeMode: Filesystem
+    #   size: 15Gi
+    # - devicePath: /dev/sdb
+    #   enabled: true
+    #   name: data-dev
+    #   storageClass: csi-rbd-sc
+    #   accessMode: ReadWriteOnce
+    #   size: 15Gi
+    #   volumeMode: Block
 
     # volumes: {}
 
-    enableAerospikePrometheusExporter: true
+    # enableAerospikePrometheusExporter: true
 
-    resources:
-      limits:
-        cpu: 1
-        memory: 1Gi
-      requests:
-        cpu: 1
-        memory: 1Gi
+    # resources:
+    #   limits:
+    #     cpu: 1
+    #     memory: 1Gi
+    #   requests:
+    #     cpu: 1
+    #     memory: 1Gi
