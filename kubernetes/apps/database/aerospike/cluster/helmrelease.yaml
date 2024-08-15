@@ -44,7 +44,7 @@ spec:
 
     initImage:
       repository: aerospike/aerospike-kubernetes-init
-      tag: 2.2.1
+      tag: 2.1.1
 
     aerospikeNamespace: "mario"
     aerospikeNamespaceMemoryGB: "10"
@@ -76,3 +76,5 @@ spec:
         volumeMode: Block
 
     volumes: []
+
+    enableAerospikePrometheusExporter: true
