@@ -62,22 +62,22 @@ spec:
 apiVersion: kafka.strimzi.io/v1beta2
 kind: KafkaTopic
 metadata:
-  name: network_clients_inventory
+  name: network-clients-inventory
   labels:
     strimzi.io/cluster: mario-cluster
 spec:
-  topicName: network_diagram
+  topicName: network_clients_inventory
   partitions: 12
   replicas: 3
 ---
 apiVersion: kafka.strimzi.io/v1beta2
 kind: KafkaTopic
 metadata:
-  name: network_devices_inventory
+  name: network-devices-inventory
   labels:
     strimzi.io/cluster: mario-cluster
 spec:
-  topicName: network_table
+  topicName: network_devices_inventory
   partitions: 12
   replicas: 3
 ---
