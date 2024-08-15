@@ -2,16 +2,16 @@
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
-  name: aerospike-database
+  name: aerospike
 spec:
   interval: 30m
   chart:
     spec:
-      chart: aerospike
-      #      version: 5.5.0
+      chart: app-template
+      version: 3.2.1
       sourceRef:
         kind: HelmRepository
-        name: aerospike
+        name: bjw-s
         namespace: flux-system
   install:
     remediation:
@@ -21,73 +21,162 @@ spec:
     remediation:
       retries: 3
   values:
-    #    dbReplicas: 3 # Also controls number of nodes in the aerospike cluster.
+    controllers:
+      aerospike:
+        type: statefulset
+        replicas: 3
+        strategy: RollingUpdate
+        rollingUpdate:
+          unavailable: 1
+        containers:
+          app:
+            nameOverride: aerospike
+            image:
+              repository: aerospike/aerospike-server
+              tag: 7.1.0.5
+            # probes:
+            #   liveness: &probes
+            #     enabled: true
+            #     custom: false
+            #     spec:
+            #       initialDelaySeconds: 0
+            #       periodSeconds: 10
+            #       timeoutSeconds: 1
+            #       failureThreshold: 3
+            #   readiness: *probes
+            # securityContext:
+            #   allowPrivilegeEscalation: false
+            #   readOnlyRootFilesystem: true
+            #   capabilities: { drop: ["ALL"] }
+            env:
+              NAMESPACE: "mario"
+              REPL_FACTOR: 3
+              MEM_GB: 10
+              DEFAULT_TTL: 0
+              HB_ADDRESS: ""
+              HB_PORT: 3002
+              FABRIC_ADDRESS: ""
+              FABRIC_PORT: 3002
+              INFO_ADDRESS: ""
+              INFO_PORT: 3002
 
-    #   terminationGracePeriodSeconds: 600
+              MY_POD_NAME:
+                valueFrom:
+                  fieldRef:
+                    fieldPath: metadata.name
+              MY_POD_NAMESPACE:
+                valueFrom:
+                  fieldRef:
+                    fieldPath: metadata.namespace
+              MY_POD_IP:
+                valueFrom:
+                  fieldRef:
+                    fieldPath: status.podIP
+        initContainers:
+          aerospike-init:
+            image:
+              repository: aerospike/aerospike-kubernetes-init
+              tag: 1.1.0
+            securityContext:
+              allowPrivilegeEscalation: false
+              readOnlyRootFilesystem: false
+              capabilities: { drop: ["ALL"] }
+            env: # Variables needed by peer-finder for discovery
+              POD_NAMESPACE:
+                valueFrom:
+                  fieldRef:
+                    fieldPath: metadata.namespace
+              SERVICE: aerospike
+        #       # -- Used to create individual disks for each instance.
+        statefulset:
+          volumeClaimTemplates:
+            - name: data
+              labels: {}
+              annotations: {}
+              globalMounts:
+                - path: /opt/aerospike/data
+              accessMode: "ReadWriteOnce"
+              # dataSourceRef:
+              #   apiGroup: snapshot.storage.k8s.io
+              #   kind: VolumeSnapshot
+              #   name: MySnapshot
+              size: 15Gi
+    persistence:
+      data:
+        type: persistentVolumeClaim
+        accessMode: ReadWriteOnce
+        size: 15Gi
+        globalMounts:
+          - path: /opt/aerospike/data
+      initconfig:
+        type: configMap
+        enabled: true
+        name: aerospike-config
+        globalMounts:
+          - path: /configs
+      config:
+        enabled: true
+        type: emptyDir
+        globalMounts:
+          - path: /etc/aerospike
 
-    # livenessProbe:
-    #   initialDelaySeconds: 30
-    #   periodSeconds: 30
-    #   timeoutSeconds: 1
-    #   successThreshold: 1
-    #   failureThreshold: 3
-    # readinessProbe:
-    #   initialDelaySeconds: 30
-    #   periodSeconds: 10
-    #   timeoutSeconds: 1
-    #   successThreshold: 1
-    #   failureThreshold: 3
-
-    image:
-      repository: aerospike/aerospike-server
-      tag: 7.1.0.5
-
-    initImage:
-      repository: aerospike/aerospike-kubernetes-init
-      tag: 2.2.1
-
-    # aerospikeNamespace: "mario"
-    # aerospikeNamespaceMemoryGB: "10"
-    # aerospikeReplicationFactor: "3"
-    # aerospikeDefaultTTL: "0"
-
-    # aerospikeClientPort: 3000
-    # aerospikeHeartbeatPort: 3002
-    # aerospikeFabricPort: 3001
-    # aerospikeInfoPort: 3003
-
-    # autoRolloutConfig: true
-
-    # antiAffinity: "on"
-
-    # nodePortServices:
-    #   enabled: true
-
-    # persistenceStorage:
-    #   {}
-    # - mountPath: /opt/aerospike/data
-    #   enabled: true
-    #   name: datadir
-    #   storageClass: csi-rbd-sc
-    #   accessMode: ReadWriteOnce
-    #   volumeMode: Filesystem
-    #   size: 15Gi
-    # - devicePath: /dev/sdb
-    #   enabled: true
-    #   name: data-dev
-    #   storageClass: csi-rbd-sc
-    #   accessMode: ReadWriteOnce
-    #   size: 15Gi
-    #   volumeMode: Block
-
-    # volumes: {}
-
-    # enableAerospikePrometheusExporter: true
-
-    # resources:
-    #   limits:
-    #     cpu: 1
-    #     memory: 1Gi
-    #   requests:
-    #     cpu: 1
-    #     memory: 1Gi
+    # defaultPodOptions:
+    #   securityContext:
+    #     runAsNonRoot: true
+    #     runAsUser: 65534
+    #     runAsGroup: 65534
+    #     seccompProfile: { type: RuntimeDefault }
+    service:
+      app:
+        controller: aerospike
+        nameOverride: "aerospike-public"
+        type: NodePort
+        ports:
+          aero-clients:
+            port: &port 3000
+          aero-mesh:
+            port: 3002
+          aero-info:
+            port: 3003
+---
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+    service.alpha.kubernetes.io/tolerate-unready-endpoints: "true"
+  name: aerospike
+  labels:
+    app.kubernetes.io/instance: aerospike
+spec:
+  publishNotReadyAddresses: true
+  ports:
+    - port: 3000
+      name: aero-clients
+  clusterIP: None
+  selector:
+    app.kubernetes.io/instance: aerospike
+---
+# serviceMonitor:
+#   app:
+#     serviceName: echo-server
+#     endpoints:
+#       - port: http
+#         scheme: http
+#         path: /metrics
+#         interval: 1m
+#         scrapeTimeout: 10s
+# ingress:
+#   app:
+#     className: external
+#     annotations:
+#       external-dns.alpha.kubernetes.io/target: "external.${SECRET_DOMAIN}"
+#     hosts:
+#       - host: "{{ .Release.Name }}.${SECRET_DOMAIN}"
+#         paths:
+#           - path: /
+#             service:
+#               identifier: app
+#               port: http
+ancer and externalIPServices too, we have an option to configure same port numbers.
+// We can even enable loadbalancer, hostNetworking and externalIPServices all three at once, given that we select same alternate access port.
+if loadBalancerServ

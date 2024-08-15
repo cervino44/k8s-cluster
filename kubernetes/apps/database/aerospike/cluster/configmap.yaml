@@ -1,0 +1,75 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: aerospike-config
+  namespace: database
+data:
+  aerospike.template.conf: |
+    # Aerospike database configuration file.
+    # This stanza must come first.
+    service {
+      user root
+      group root
+      pidfile /var/run/aerospike/asd.pid
+      proto-fd-max 15000
+      cluster-name mario
+    }
+
+    logging {
+
+      # Log file must be an absolute path.
+      file ${LOGFILE} {
+        context any info
+      }
+
+      # Send log messages to stdout
+      console {
+        context any info
+      }
+    }
+
+    network {
+      service {
+        address ${SERVICE_ADDRESS}
+        port ${SERVICE_PORT}
+
+        # Uncomment the following to set the `access-address` parameter to the
+        # IP address of the Docker host. This will the allow the server to correctly
+        # publish the address which applications and other nodes in the cluster to
+        # use when addressing this node.
+        # access-address <IPADDR>
+      }
+
+      heartbeat {
+          mode mesh
+          port 3002
+
+          mesh-seed-address-port aerospike.database 3002 
+
+          interval 150
+          timeout 10
+      }
+
+      fabric {
+        port 3001
+      }      
+    }
+
+    namespace ${NAMESPACE} {
+      replication-factor ${REPL_FACTOR}
+      default-ttl ${DEFAULT_TTL}
+      # nsup-period ${NSUP_PERIOD}
+
+      storage-engine memory {
+          data-size ${MEM_GB}G
+      }
+
+      # To use file storage backing, comment out the line above and use the
+      # following lines instead.
+
+      # storage-engine device {
+      #   file /opt/aerospike/data/${MY_POD_NAME}-${NAMESPACE}.dat
+      #   filesize ${MEM_GB}G
+      #   # data-in-memory true # Store data in memory in addition to file.
+      # }
+    }
