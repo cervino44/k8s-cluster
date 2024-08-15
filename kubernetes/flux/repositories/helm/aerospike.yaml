@@ -6,4 +6,4 @@ metadata:
   namespace: flux-system
 spec:
   interval: 5m
-  url: https://aerospike.github.io/aerospike-kubernetes-enterprise
+  url: https://aerospike.github.io/aerospike-kubernetes

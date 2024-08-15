@@ -1,0 +1,69 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: aerospike-database
+spec:
+  interval: 30m
+  chart:
+    spec:
+      chart: aerospike
+      version: 3.3.1
+      sourceRef:
+        kind: HelmRepository
+        name: aerospike
+        namespace: flux-system
+  install:
+    remediation:
+      retries: 3
+  upgrade:
+    cleanupOnFail: true
+    remediation:
+      retries: 3
+  values:
+    dbReplicas: 3 # Also controls number of nodes in the aerospike cluster.
+
+    # Number of seconds to wait after SIGTERM before force killing the pod.
+    terminationGracePeriodSeconds: 600
+
+    # liveness and readiness probe parameters (for aerospike containers)
+    livenessProbe:
+      initialDelaySeconds: 30
+      periodSeconds: 30
+      timeoutSeconds: 1
+      successThreshold: 1
+      failureThreshold: 3
+    readinessProbe:
+      initialDelaySeconds: 30
+      periodSeconds: 10
+      timeoutSeconds: 1
+      successThreshold: 1
+      failureThreshold: 3
+
+    image:
+    repository: aerospike/aerospike-server
+    tag: 7.1.0.5
+
+    aerospikeNamespace: "mario"
+    aerospikeNamespaceMemoryGB: "10"
+    aerospikeReplicationFactor: "3"
+    aerospikeDefaultTTL: "0"
+
+    aerospikeClientPort: 3000
+    aerospikeHeartbeatPort: 3002
+    aerospikeFabricPort: 3001
+    aerospikeInfoPort: 3003
+
+    nodePortServices:
+      enabled: true
+
+    persistenceStorage:
+      - mountPath: /opt/aerospike/data
+        enabled: false
+        name: datadir
+        storageClass: csi-rbd-sc
+        accessMode: ReadWriteOnce
+        volumeMode: Filesystem
+        size: 15Gi
+
+    volumes: []
