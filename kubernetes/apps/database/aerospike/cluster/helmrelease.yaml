@@ -39,8 +39,8 @@ spec:
       failureThreshold: 3
 
     image:
-    repository: aerospike/aerospike-server
-    tag: 7.1.0.5
+      repository: aerospike/aerospike-server
+      tag: 7.1.0.5
 
     aerospikeNamespace: "mario"
     aerospikeNamespaceMemoryGB: "10"
