@@ -25,18 +25,18 @@ spec:
 
     terminationGracePeriodSeconds: 600
 
-    livenessProbe:
-      initialDelaySeconds: 30
-      periodSeconds: 30
-      timeoutSeconds: 1
-      successThreshold: 1
-      failureThreshold: 3
-    readinessProbe:
-      initialDelaySeconds: 30
-      periodSeconds: 10
-      timeoutSeconds: 1
-      successThreshold: 1
-      failureThreshold: 3
+    # livenessProbe:
+    #   initialDelaySeconds: 30
+    #   periodSeconds: 30
+    #   timeoutSeconds: 1
+    #   successThreshold: 1
+    #   failureThreshold: 3
+    # readinessProbe:
+    #   initialDelaySeconds: 30
+    #   periodSeconds: 10
+    #   timeoutSeconds: 1
+    #   successThreshold: 1
+    #   failureThreshold: 3
 
     image:
       repository: aerospike/aerospike-server
