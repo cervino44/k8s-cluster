@@ -23,10 +23,8 @@ spec:
   values:
     dbReplicas: 3 # Also controls number of nodes in the aerospike cluster.
 
-    # Number of seconds to wait after SIGTERM before force killing the pod.
     terminationGracePeriodSeconds: 600
 
-    # liveness and readiness probe parameters (for aerospike containers)
     livenessProbe:
       initialDelaySeconds: 30
       periodSeconds: 30
