@@ -22,4 +22,4 @@ resources:
   - ./strimzi.yaml
   - ./github-runner.yaml
   - ./jupyterhub.yaml
-  - ./aerospike.yaml
+  - ./hazelcast.yaml

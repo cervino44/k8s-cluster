@@ -2,8 +2,8 @@
 apiVersion: source.toolkit.fluxcd.io/v1
 kind: HelmRepository
 metadata:
-  name: aerospike
+  name: hazelcast
   namespace: flux-system
 spec:
   interval: 5m
-  url: https://aerospike.github.io/aerospike-kubernetes
+  url: https://hazelcast-charts.s3.amazonaws.com/
