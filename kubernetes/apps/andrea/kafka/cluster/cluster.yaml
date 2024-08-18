@@ -58,8 +58,8 @@ spec:
         tls: true
       - name: external
         port: 9094
-        type: nodeport
-        tls: false        
+        type: loadbalancer
+        tls: false
     config:
       offsets.topic.replication.factor: 3
       transaction.state.log.replication.factor: 3
