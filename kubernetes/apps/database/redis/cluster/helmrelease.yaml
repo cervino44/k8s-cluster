@@ -1,0 +1,53 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: redis-cluster
+spec:
+  interval: 30m
+  chart:
+    spec:
+      chart: redis
+      version: 20.0.2
+      sourceRef:
+        kind: HelmRepository
+        name: bitami
+        namespace: flux-system
+  install:
+    remediation:
+      retries: 3
+  upgrade:
+    cleanupOnFail: true
+    remediation:
+      retries: 3
+  values:
+    global:
+      defaultStorageClass: csi-rbd-sc
+      redis:
+        password: ""
+    usePassword: true
+    password: "0123456789"
+
+    master:
+      service:
+        type: LoadBalancer
+
+    # pdb:
+    #   create: true
+    #   maxUnavailable: 1
+
+    # cluster:
+    #   nodes: 10
+    #   replicas: 1
+    sentinels:
+      enabled: true
+
+    metrics:
+      enabled: true
+
+    # master:
+    # extraFlags:
+    # - "{--loadmodule,/usr/lib/redis/modules/redisearch.so,--loadmodule,/usr/lib/redis/modules/rejson.so}"
+    # replica:
+    # extraFlags:
+    # - "{--loadmodule,/usr/lib/redis/modules/redisearch.so,--loadmodule,/usr/lib/redis/modules/rejson.so}"
