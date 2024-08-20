@@ -2,13 +2,13 @@
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
-  name: aerospike-operator
+  name: postgres-operator
 spec:
   interval: 30m
   chart:
     spec:
-      chart: aerospike-kubernetes-operator
-      version: 3.3.1
+      chart: postgres-operator
+      #    version: 3.3.1
       sourceRef:
         kind: HelmRepository
         name: aerospike
