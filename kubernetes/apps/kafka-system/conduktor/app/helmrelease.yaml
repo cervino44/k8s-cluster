@@ -37,9 +37,9 @@ spec:
     config:
       organization:
         name: mario
-      # admin:
-      #   email: "a@b.com"
-      #   password: "admin"
+      admin:
+        email: "a@b.com"
+        password: "admin"
       database:
         host: conduktor-db
         name: console

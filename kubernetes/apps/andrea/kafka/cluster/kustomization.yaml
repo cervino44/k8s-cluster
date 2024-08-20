@@ -5,7 +5,7 @@ resources:
   #- ./bridge.yaml
   - ./cluster.yaml
   #- ./cruise-control.yaml
-  - ./ksql.yaml
-  - ./schema-registry.yaml
+  #- ./ksql.yaml
+  #- ./schema-registry.yaml
   - ./rest-proxy.yaml
   - ./authentication.sops.yaml
