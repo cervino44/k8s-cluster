@@ -23,3 +23,4 @@ resources:
   - ./github-runner.yaml
   - ./jupyterhub.yaml
   - ./bitami.yaml
+  - ./joxit.yaml
