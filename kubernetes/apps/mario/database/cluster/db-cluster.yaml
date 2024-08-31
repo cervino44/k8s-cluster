@@ -22,6 +22,15 @@ spec:
   databases:
     backend: mario # dbname: owner
 
+  masterServiceAnnotations:
+    "coredns.io/hostname": "mario-db-master.vegmond.net"  
+  replicaServiceAnnotations:
+    "coredns.io/hostname": "mario-db-repl.vegmond.net"  
+
+
+  enableMasterLoadBalancer : true
+  enableReplicaLoadBalancer : true
+
   allowedSourceRanges:
     - 192.168.23.0/24
     # IP ranges to access your cluster go here

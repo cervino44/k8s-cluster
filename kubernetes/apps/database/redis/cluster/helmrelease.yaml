@@ -32,22 +32,8 @@ spec:
       service:
         type: LoadBalancer
 
-    # pdb:
-    #   create: true
-    #   maxUnavailable: 1
-
-    # cluster:
-    #   nodes: 10
-    #   replicas: 1
     sentinels:
       enabled: true
 
     metrics:
       enabled: true
-
-    # master:
-    # extraFlags:
-    # - "{--loadmodule,/usr/lib/redis/modules/redisearch.so,--loadmodule,/usr/lib/redis/modules/rejson.so}"
-    # replica:
-    # extraFlags:
-    # - "{--loadmodule,/usr/lib/redis/modules/redisearch.so,--loadmodule,/usr/lib/redis/modules/rejson.so}"
