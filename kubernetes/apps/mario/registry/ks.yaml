@@ -5,7 +5,7 @@ metadata:
   name: &app registry
   namespace: flux-system
 spec:
-  targetNamespace: kafka-system
+  targetNamespace: mario
   commonMetadata:
     labels:
       app.kubernetes.io/name: *app
