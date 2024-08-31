@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: adminer
-          image: adminer:4.6.3
+          image: adminer:4.8.1
           ports:
             - containerPort: 8080
           env:
