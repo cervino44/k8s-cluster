@@ -5,6 +5,8 @@ metadata:
     run: registry
   name: registry
 spec:
+  strategy:
+    type: Recreate
   replicas: 1
   selector:
     matchLabels:
@@ -16,16 +18,39 @@ spec:
     spec:
       containers:
       - name: registry
-        image: registry:2
+        image: registry:2.7
+        env:
+        - name: REGISTRY_HTTP_HEADERS_Access-Control-Allow-Origin
+          value: "['*']"
+        # - name: REGISTRY_HTTP_HEADERS_Access-Control-Allow-Methods
+        #   value: '[HEAD,GET,OPTIONS,DELETE]'
+        # - name: REGISTRY_HTTP_HEADERS_Access-Control-Allow-Credentials
+        #   value: '[true]'
+        # - name: REGISTRY_HTTP_HEADERS_Access-Control-Allow-Headers
+        #   value: '[Authorization,Accept,Cache-Control]'
+        # - name: REGISTRY_HTTP_HEADERS_Access-Control-Expose-Headers
+        #   value: '[Docker-Content-Digest]'
+        # - name: REGISTRY_HTTP_HEADERS_X-Content-Type-Options
+        #   value: '[nosniff]'
+        - name: REGISTRY_STORAGE_DELETE_ENABLED
+          value: 'true'
         ports:
-        - containerPort: 5000
+          - name: registry
+            containerPort: 5000
+            protocol: TCP
         volumeMounts:
         - name: registry-data
           mountPath: /var/lib/registry
           subPath: registry
+        livenessProbe:
+          httpGet:
+            path: /v2/
+            port: registry
+        readinessProbe:
+          httpGet:
+            path: /v2/
+            port: registry          
       volumes:
       - name: registry-data
         persistentVolumeClaim:
           claimName: registry-data
-
-  
