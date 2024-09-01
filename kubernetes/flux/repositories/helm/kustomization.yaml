@@ -15,11 +15,12 @@ resources:
   - ./external-dns.yaml
   - ./ingress-nginx.yaml
   - ./k8s-gateway.yaml
-  - ./conduktor.yaml
-  - ./rook.yaml
+  - ./bitami.yaml
   - ./elastic.yaml
-  - ./zalando.yaml
-  - ./strimzi.yaml
-  - ./github-runner.yaml
+  - ./harbor.yaml
   - ./jupyterhub.yaml
-  - ./aerospike.yaml
+  - ./rook.yaml
+  - ./strimzi.yaml
+  - ./zalando.yaml
+  - ./conduktor.yaml
+  - ./github-runner.yaml

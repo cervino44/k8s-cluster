@@ -72,39 +72,15 @@ nodes:
         mtu: 1500
         vip:
           ip: "192.168.23.2"
-  - hostname: "talos3"
-    ipAddress: "192.168.23.13"
-    installDisk: "/dev/sda"
-    talosImageURL: factory.talos.dev/installer/ce4c980550dd2ab1b17bbf2b08801c7eb59418eafe8f279833297925d67c7515
-    controlPlane: false
-    networkInterfaces:
-      - deviceSelector:
-          hardwareAddr: "bc:24:11:3e:44:77"
-        dhcp: false
-        addresses:
-          - "192.168.23.13/24"
-        routes:
-          - network: 0.0.0.0/0
-            gateway: "192.168.23.1"
-        mtu: 1500
-  - hostname: "talos4"
-    ipAddress: "192.168.23.14"
-    installDisk: "/dev/sda"
-    talosImageURL: factory.talos.dev/installer/ce4c980550dd2ab1b17bbf2b08801c7eb59418eafe8f279833297925d67c7515
-    controlPlane: false
-    networkInterfaces:
-      - deviceSelector:
-          hardwareAddr: "bc:24:11:a4:33:bd"
-        dhcp: false
-        addresses:
-          - "192.168.23.14/24"
-        routes:
-          - network: 0.0.0.0/0
-            gateway: "192.168.23.1"
-        mtu: 1500
 
 # Global patches
 patches:
+  - # Force nameserver
+    |-
+    machine:
+      network:
+        nameservers:
+          - 192.168.23.1
   - "@./patches/global/cluster-discovery.yaml"
   - "@./patches/global/containerd.yaml"
   - "@./patches/global/disable-search-domain.yaml"
@@ -120,3 +96,4 @@ controlPlane:
     - "@./patches/controller/cluster.yaml"
     - "@./patches/controller/disable-admission-controller.yaml"
     - "@./patches/controller/etcd.yaml"
+
