@@ -23,4 +23,4 @@ resources:
   - ./strimzi.yaml
   - ./zalando.yaml
   - ./conduktor.yaml
-  - ./githubv-runner.yaml
+  - ./github-runner.yaml
