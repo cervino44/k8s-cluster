@@ -30,7 +30,7 @@ spec:
         containers:
           app:
             image:
-              repository: registry.vegmond.net/mario-backend
+              repository: harbor.vegmond.net/mario-backend
               tag: latest
             env:
               UVICORN_PORT: &port 5000
@@ -41,7 +41,7 @@ spec:
                   secretKeyRef:
                     name:  mario.mario-db.credentials.postgresql.acid.zalan.do
                     key: password
-              MARIO_KAFKA__BOOTSTRAP_SERVERS: mario-cluster-kafka-bootstrap.rob:9092
+              MARIO_KAFKA_BOOTSTRAP_SERVERS: mario-cluster-kafka-bootstrap.rob:9092
 
             probes:
               liveness: &probes
