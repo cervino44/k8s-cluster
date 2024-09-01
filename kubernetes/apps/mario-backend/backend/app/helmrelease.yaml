@@ -36,6 +36,11 @@ spec:
               UVICORN_PORT: &port 5000
               UVICORN_HOST: 0.0.0.0
               MARIO_DB_HOST: mario-db
+              MARIO_DB_PASSWORD: 
+                valueFrom:
+                  secretKeyRef:
+                    name:  mario.mario-db.credentials.postgresql.acid.zalan.do
+                    key: password
             probes:
               liveness: &probes
                 enabled: true
