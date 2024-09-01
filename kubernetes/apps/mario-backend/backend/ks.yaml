@@ -2,19 +2,19 @@
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
-  name: &app prometheus-operator-crds
+  name: &app mario-backend
   namespace: flux-system
 spec:
-  targetNamespace: observability
+  targetNamespace: mario-backend
   commonMetadata:
     labels:
       app.kubernetes.io/name: *app
-  path: ./kubernetes/apps/observability/prometheus-operator-crds/app
-  prune: false # never should be deleted
+  path: ./kubernetes/apps/mario-backend/backend/app
+  prune: true
   sourceRef:
     kind: GitRepository
     name: home-kubernetes
-  wait: false
+  wait: true
   interval: 30m
   retryInterval: 1m
   timeout: 5m
