@@ -201,33 +201,11 @@ spec:
     database:
       # if external database is used, set "type" to "external"
       # and fill the connection information in "external" section
-      type: external
-      external:
-        host: "services-db"
-        port: "5432"
-        username: "harbor"
-        coreDatabase: "harbor"
-        existingSecret: "harbor.services-db.credentials.postgresql.acid.zalan.do"
+      type: inertnal
+      internal:
+        password: "changeit"
 
     redis:
       # if external Redis is used, set "type" to "external"
       # and fill the connection information in "external" section
-      type: external
-      external:
-        addr: "redis-cluster-headless:6379"
-        # The "coreDatabaseIndex" must be "0" as the library Harbor
-        # used doesn't support configuring it
-        # harborDatabaseIndex defaults to "0", but it can be configured to "6", this config is optional
-        # cacheLayerDatabaseIndex defaults to "0", but it can be configured to "7", this config is optional
-        coreDatabaseIndex: "0"
-        jobserviceDatabaseIndex: "0"
-        registryDatabaseIndex: "0"
-        trivyAdapterIndex: "0"
-        # harborDatabaseIndex: "6"
-        # cacheLayerDatabaseIndex: "7"
-        # username field can be an empty string, and it will be authenticated against the default user
-        username: ""
-        password: ""
-        # If using existingSecret, the key must be REDIS_PASSWORD
-        existingSecret: ""
-
+      type: internal
