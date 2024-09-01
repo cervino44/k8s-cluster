@@ -42,7 +42,7 @@ spec:
                 spec:
                   httpGet:
                     path: /
-                    port: ^port
+                    port: *port
                   initialDelaySeconds: 0
                   periodSeconds: 60
                   timeoutSeconds: 1
