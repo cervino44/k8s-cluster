@@ -201,7 +201,7 @@ spec:
     database:
       # if external database is used, set "type" to "external"
       # and fill the connection information in "external" section
-      type: inertnal
+      type: internal
       internal:
         password: "changeit"
 
