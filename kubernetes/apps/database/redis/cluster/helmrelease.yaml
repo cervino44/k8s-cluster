@@ -31,7 +31,8 @@ spec:
     master:
       service:
         type: LoadBalancer
-        loadBalancerSourceRanges: 192.168.23.0/24
+        loadBalancerSourceRanges:
+          - 192.168.23.0/24
         annotations:
           "coredns.io/hostname": "redis.vegmond.net"  
     sentinels:
