@@ -41,6 +41,8 @@ spec:
                   secretKeyRef:
                     name:  mario.mario-db.credentials.postgresql.acid.zalan.do
                     key: password
+              MARIO_KAFKA__BOOTSTRAP_SERVERS: mario-cluster-kafka-bootstrap.rob:9092
+
             probes:
               liveness: &probes
                 enabled: true
