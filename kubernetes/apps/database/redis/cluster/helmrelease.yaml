@@ -29,7 +29,7 @@ spec:
     password: "0123456789"
 
     master:
-      service:
+      service:127.0.0.1
         type: LoadBalancer
         loadBalancerSourceRanges:
           - 192.168.23.0/24
