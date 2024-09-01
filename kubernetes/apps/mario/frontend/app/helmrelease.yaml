@@ -2,7 +2,7 @@
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
-  name: backend
+  name: frontend
 spec:
   interval: 30m
   chart:
@@ -30,11 +30,11 @@ spec:
         containers:
           app:
             image:
-              repository: registry.vegmond.net/mario-frontend
+              repository: harbor.vegmond.net/dotzero24/mario-frontend
               tag: latest
             env:
-              MARIO_BACKEND_URL: "http://backend.mario-backend:5000"
-              GUNICORN_CMD_ARGS: "--bind 0.0.0.0:5000 --workers=1"
+              MARIO_BACKEND_URL: http://backend.mario-backend:5000
+              PORT : &port 5000
             probes:
               liveness: &probes
                 enabled: true
@@ -42,7 +42,7 @@ spec:
                 spec:
                   httpGet:
                     path: /
-                    port: &port 5000
+                    port: ^port
                   initialDelaySeconds: 0
                   periodSeconds: 60
                   timeoutSeconds: 1
@@ -64,6 +64,10 @@ spec:
         ports:
           http:
             port: *port
+    persistence:
+      tmp:
+        enabled: true
+        type: emptyDir                    
     # serviceMonitor:
     #   app:
     #     serviceName: "{{ .Release.Name }} "
