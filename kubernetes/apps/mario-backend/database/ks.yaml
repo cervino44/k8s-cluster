@@ -5,11 +5,11 @@ metadata:
   name: &app mario-postgres
   namespace: flux-system
 spec:
-  targetNamespace: mario
+  targetNamespace: mario-backend
   commonMetadata:
     labels:
       app.kubernetes.io/name: *app
-  path: ./kubernetes/apps/mario/database/cluster
+  path: ./kubernetes/apps/mario-backend/database/cluster
   prune: true
   sourceRef:
     kind: GitRepository
