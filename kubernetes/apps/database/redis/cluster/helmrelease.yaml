@@ -35,7 +35,7 @@ spec:
         annotations:
           "coredns.io/hostname": "redis.vegmond.net"  
     sentinels:
-      enabled: true
+      enabled: false
 
     metrics:
-      enabled: true
+      enabled: false
