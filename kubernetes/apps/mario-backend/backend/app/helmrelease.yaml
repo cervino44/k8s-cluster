@@ -30,7 +30,7 @@ spec:
         containers:
           app:
             image:
-              repository: harbor.vegmond.net/mario-backend
+              repository: harbor.vegmond.net/dotzero24/mario-backend
               tag: latest
             env:
               UVICORN_PORT: &port 5000
