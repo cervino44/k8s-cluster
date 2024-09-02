@@ -2,7 +2,7 @@
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
-  name: gpt-create
+  name: prompt-lookup
 spec:
   interval: 30m
   chart:
@@ -30,7 +30,7 @@ spec:
         containers:
           app:
             image:
-              repository: harbor.vegmond.net/dotzero24/mario-gpt-create
+              repository: harbor.vegmond.net/dotzero24/mario-prompt-lookup
               tag: latest
             env:
               MARIO_KV_host: redis-cluster-master.database

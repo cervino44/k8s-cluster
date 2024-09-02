@@ -4,10 +4,11 @@ kind: Kustomization
 resources:
   - ./chatlogic-math.yaml
   - ./chatlogic.yaml
-  - ./diagram_graphics.yaml
-  - ./image_forwarder.yaml
-  - ./intent_identifier.yaml
-  - ./language_identifier.yaml
-  - ./message_forwarder.yaml
-  - ./prompt_lookup.yaml
-  - ./gpt_create.yaml
+  - ./diagram-graphics.yaml
+  - ./image-forwarder.yaml
+  - ./intent-identifier.yaml
+  - ./language-identifier.yaml
+  - ./message-forwarder.yaml
+  - ./prompt-lookup.yaml
+  - ./gpt-create.yaml
+  - ./mailbox-handler.yaml
