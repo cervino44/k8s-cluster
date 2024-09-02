@@ -30,7 +30,7 @@ spec:
         containers:
           app:
             image:
-              repository: harbor.vegmond.net/dotzero24/mario-mailbox_handler
+              repository: harbor.vegmond.net/dotzero24/mario-mailbox-handler
               tag: latest
             env:
               MARIO_KV_host: redis-cluster-master.database
