@@ -60,6 +60,23 @@ spec:
         port: 9094
         type: loadbalancer
         tls: false
+        configuration:
+          bootstrap:
+            annotations:
+              external-dns.alpha.kubernetes.io/hostname: kafka-rob.vegmond.net
+              external-dns.alpha.kubernetes.io/ttl: "60"
+    template:
+      pod:
+        affinity:              
+          podAntiAffinity:
+            requiredDuringSchedulingIgnoredDuringExecution:
+              - labelSelector:
+                  matchExpressions:
+                    - key: strimzi.io/name
+                      operator: In
+                      values:
+                        - mario-cluster-kafka
+                topologyKey: "kubernetes.io/hostname"
     config:
       offsets.topic.replication.factor: 3
       transaction.state.log.replication.factor: 3
