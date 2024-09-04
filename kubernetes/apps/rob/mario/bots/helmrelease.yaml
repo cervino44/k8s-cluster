@@ -2,7 +2,7 @@
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
-  name: webex
+  name: bots
 spec:
   interval: 30m
   chart:
@@ -36,6 +36,7 @@ spec:
               MARIO_KV_host: redis-cluster-master.database
               MARIO_BACKEND_URL: http://backend.mario-backend:5000
               MARIO_PUBLIC_URL: https://rob.vegmond.net
+              BOTS_PUBLIC_URL: https://rob.vegmond.net
               MARIO_KAFKA_BOOTSTRAP_SERVERS: mario-cluster-kafka-bootstrap:9092
               UVICORN_PORT: &port 5000
               UVICORN_HOST: 0.0.0.0
@@ -90,7 +91,7 @@ spec:
 #          - host: "backend.${SECRET_DOMAIN}"
           - host: "rob.vegmond.net"
             paths:
-              - path: /bots/webex/
+              - path: /bots/
                 pathType: ImplementationSpecific
                 service:
                   identifier: app

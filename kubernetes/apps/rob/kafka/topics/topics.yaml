@@ -90,3 +90,13 @@ metadata:
 spec:
   partitions: 12
   replicas: 3
+---
+apiVersion: kafka.strimzi.io/v1beta2
+kind: KafkaTopic
+metadata:
+  name: webbot
+  labels:
+    strimzi.io/cluster: webbot
+spec:
+  partitions: 12
+  replicas: 3
