@@ -12,3 +12,4 @@ resources:
   - ./prompt-lookup.yaml
   - ./gpt-create.yaml
   - ./mailbox-handler.yaml
+  - ./demo-bot.yaml
