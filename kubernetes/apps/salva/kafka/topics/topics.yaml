@@ -1,0 +1,102 @@
+apiVersion: kafka.strimzi.io/v1beta2
+kind: KafkaTopic
+metadata:
+  name: aaa
+  labels:
+    strimzi.io/cluster: mario-cluster
+spec:
+  partitions: 12
+  replicas: 3
+---
+apiVersion: kafka.strimzi.io/v1beta2
+kind: KafkaTopic
+metadata:
+  name: bbb
+  labels:
+    strimzi.io/cluster: mario-cluster
+spec:
+  partitions: 12
+  replicas: 3
+---
+apiVersion: kafka.strimzi.io/v1beta2
+kind: KafkaTopic
+metadata:
+  name: ccc
+  labels:
+    strimzi.io/cluster: mario-cluster
+spec:
+  partitions: 12
+  replicas: 3
+---
+apiVersion: kafka.strimzi.io/v1beta2
+kind: KafkaTopic
+metadata:
+  name: chatlogic
+  labels:
+    strimzi.io/cluster: mario-cluster
+spec:
+  partitions: 12
+  replicas: 3
+---
+apiVersion: kafka.strimzi.io/v1beta2
+kind: KafkaTopic
+metadata:
+  name: response
+  labels:
+    strimzi.io/cluster: mario-cluster
+spec:
+  partitions: 12
+  replicas: 3
+---
+apiVersion: kafka.strimzi.io/v1beta2
+kind: KafkaTopic
+metadata:
+  name: network-configuration
+  labels:
+    strimzi.io/cluster: mario-cluster
+spec:
+  topicName: network_configuration
+  partitions: 12
+  replicas: 3
+---
+apiVersion: kafka.strimzi.io/v1beta2
+kind: KafkaTopic
+metadata:
+  name: network-clients-inventory
+  labels:
+    strimzi.io/cluster: mario-cluster
+spec:
+  topicName: network_clients_inventory
+  partitions: 12
+  replicas: 3
+---
+apiVersion: kafka.strimzi.io/v1beta2
+kind: KafkaTopic
+metadata:
+  name: network-devices-inventory
+  labels:
+    strimzi.io/cluster: mario-cluster
+spec:
+  topicName: network_devices_inventory
+  partitions: 12
+  replicas: 3
+---
+apiVersion: kafka.strimzi.io/v1beta2
+kind: KafkaTopic
+metadata:
+  name: trigger-diagrams
+  labels:
+    strimzi.io/cluster: mario-cluster
+spec:
+  partitions: 12
+  replicas: 3
+---
+apiVersion: kafka.strimzi.io/v1beta2
+kind: KafkaTopic
+metadata:
+  name: webbot
+  labels:
+    strimzi.io/cluster: webbot
+spec:
+  partitions: 12
+  replicas: 3

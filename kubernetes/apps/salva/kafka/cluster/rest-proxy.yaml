@@ -1,0 +1,117 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: rest-proxy
+spec:
+  interval: 30m
+  chart:
+    spec:
+      chart: app-template
+      version: 3.2.1
+      sourceRef:
+        kind: HelmRepository
+        name: bjw-s
+        namespace: flux-system
+  install:
+    remediation:
+      retries: 3
+  upgrade:
+    cleanupOnFail: true
+    remediation:
+      retries: 3
+  values:
+    controllers:
+      main:
+        replicas: 1
+        strategy: RollingUpdate
+        annotations:
+          reloader.stakater.com/auto: "true"
+        containers:
+          app:
+            image:
+              repository: confluentinc/cp-kafka-rest
+              tag: 7.7.0
+            env:
+              KAFKA_REST_HOST_NAME:
+                valueFrom:
+                  fieldRef:
+                    apiVersion: v1
+                    fieldPath: metadata.name
+              KAFKA_REST_BOOTSTRAP_SERVERS: mario-cluster-kafka-bootstrap:9092
+              KAFKA_REST_LISTENERS: http://0.0.0.0:8082
+              KAFKA_REST_SCHEMA_REGISTRY_URL: http://kafka-schema-registry:8082
+            probes:
+              liveness: &probes
+                enabled: true
+                custom: true
+                spec:
+                  httpGet:
+                    path: /
+                    port: &port 8082
+                  initialDelaySeconds: 0
+                  periodSeconds: 10
+                  timeoutSeconds: 1
+                  failureThreshold: 3
+              readiness: *probes
+            securityContext:
+              allowPrivilegeEscalation: false
+              readOnlyRootFilesystem: false
+              capabilities: { drop: ["ALL"] }
+            # resources:
+            #   requests:
+            #     cpu: 4000m
+            #   limits:
+            #     memory: 2048Mi
+    defaultPodOptions:
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 1000
+        runAsGroup: 1000
+        seccompProfile: { type: RuntimeDefault }
+    service:
+      app:
+        controller: main
+        ports:
+          http:
+            port: *port
+    serviceMonitor:
+      app:
+        serviceName: "{{ .Release.Name }} "
+        endpoints:
+          - port: http
+            scheme: http
+            path: /metrics
+            interval: 1m
+            scrapeTimeout: 10s
+    ingress:
+      app:
+        annotations:
+          nginx.ingress.kubernetes.io/affinity: "cookie"
+          nginx.ingress.kubernetes.io/affinity-mode: "persistent"
+          nginx.ingress.kubernetes.io/session-cookie-name: "routing-cookie"
+          nginx.ingress.kubernetes.io/session-cookie-expires: "172800"
+          nginx.ingress.kubernetes.io/session-cookie-max-age: "172800"
+          nginx.ingress.kubernetes.io/rewrite-target: /$2
+
+          # type of authentication
+          nginx.ingress.kubernetes.io/auth-type: basic
+          # name of the secret that contains the user/password definitions
+          nginx.ingress.kubernetes.io/auth-secret: digest-auth
+
+          nginx.ingress.kubernetes.io/auth-secret-type: auth-map
+
+          # message to display with an appropriate context why the authentication is required
+          nginx.ingress.kubernetes.io/auth-realm: "Authentication Required"
+
+          external-dns.alpha.kubernetes.io/target: "external.${SECRET_DOMAIN}"
+
+        className: internal
+        hosts:
+          - host: "kafka.${SECRET_DOMAIN}"
+            paths:
+              - path: "/{{.Release.Namespace}}(/|$)(.*)"
+                pathType: ImplementationSpecific
+                service:
+                  identifier: app
+                  port: http
