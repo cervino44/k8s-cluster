@@ -1,0 +1,82 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: network--details
+spec:
+  interval: 30m
+  chart:
+    spec:
+      chart: app-template
+      version: 3.2.1
+      sourceRef:
+        kind: HelmRepository
+        name: bjw-s
+        namespace: flux-system
+  install:
+    remediation:
+      retries: 3
+  upgrade:
+    cleanupOnFail: true
+    remediation:
+      retries: 3
+  values:
+    controllers:
+      main:
+        replicas: 2
+        strategy: RollingUpdate
+        annotations:
+          reloader.stakater.com/auto: "true"
+        containers:
+          app:
+            image:
+              repository: harbor.vegmond.net/dotzero24/mario-network-details
+              tag: latest
+            env:
+              MARIO_KV_host: redis-cluster-master.database
+              MARIO_BACKEND_URL: http://backend.mario-backend:5000
+              MARIO_KAFKA_BOOTSTRAP_SERVERS: mario-cluster-kafka-bootstrap:9092
+              UVICORN_PORT: &port 5000
+              UVICORN_HOST: 0.0.0.0
+            probes:
+              liveness: &probes
+                enabled: true
+                custom: true
+                spec:
+                  httpGet:
+                    path: /health
+                    port: *port
+                  initialDelaySeconds: 0
+                  periodSeconds: 10
+                  timeoutSeconds: 1
+                  failureThreshold: 3
+              readiness: *probes
+            securityContext:
+              allowPrivilegeEscalation: false
+              readOnlyRootFilesystem: true
+              capabilities: { drop: ["ALL"] }
+    defaultPodOptions:
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 1000
+        runAsGroup: 1000
+        seccompProfile: { type: RuntimeDefault }
+    service:
+      app:
+        controller: main
+        ports:
+          http:
+            port: *port
+    persistence:
+      tmp:
+        enabled: true
+        type: emptyDir                    
+    # serviceMonitor:
+    #   app:
+    #     serviceName: "{{ .Release.Name }} "
+    #     endpoints:
+    #       - port: http
+    #         scheme: http
+    #         path: /metrics
+    #         interval: 1m
+    #         scrapeTimeout: 10s
