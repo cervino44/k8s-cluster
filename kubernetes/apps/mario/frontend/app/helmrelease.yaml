@@ -35,6 +35,7 @@ spec:
             env:
               MARIO_KV_host: redis-cluster-master.database
               MARIO_BACKEND_URL: http://backend.mario-backend:5000
+              MARIO_PUBLIC_URL: https://frontend.vegmond.net
               UVICORN_PORT: &port 5000
               UVICORN_HOST: 0.0.0.0
             probes:
