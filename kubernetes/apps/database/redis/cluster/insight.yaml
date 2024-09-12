@@ -11,12 +11,32 @@ metadata:
     # variables `RI_APP_HOST` and
     # `RI_APP_PORT`
 spec:
-  type: LoadBalancer
+  type: ClusterIP
   ports:
     - port: 80
       targetPort: 5540
   selector:
     app: redisinsight
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: redisinsight-service
+  annotations:
+    external-dns.alpha.kubernetes.io/target: "external.${SECRET_DOMAIN}"
+spec:
+  ingressClassName: internal
+  rules:
+    - host: "redis-insight.${SECRET_DOMAIN}"
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: redisinsight-service
+                port:
+                  number: 80
 ---
 # Redis Insight deployment with name 'redisinsight'
 apiVersion: apps/v1
