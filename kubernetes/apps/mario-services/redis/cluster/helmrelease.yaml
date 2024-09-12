@@ -23,11 +23,10 @@ spec:
   values:
     global:
       defaultStorageClass: csi-rbd-sc
-      redis:
-        password: ""
-    usePassword: true
-    password: "0123456789"
-
+      # redis:
+      #   password: ""
+    usePassword: false
+    # password: ""
     master:
       service:
         type: LoadBalancer
