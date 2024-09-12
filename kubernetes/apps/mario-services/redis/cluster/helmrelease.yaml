@@ -36,7 +36,7 @@ spec:
         loadBalancerSourceRanges:
           - 192.168.23.0/24
         annotations:
-          "cor`edns.io/hostname": "redis.vegmond.net"  
+          "coredns.io/hostname": "redis.vegmond.net"  
 
     metrics:
       enabled: true
