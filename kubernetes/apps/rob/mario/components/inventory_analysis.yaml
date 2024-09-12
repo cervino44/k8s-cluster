@@ -33,7 +33,7 @@ spec:
               repository: harbor.vegmond.net/dotzero24/mario-inventory-analysis
               tag: latest
             env:
-              MARIO_KV_host: redis-cluster-master.database
+              MARIO_KV_host: redis-cluster-master.mario-serivce
               MARIO_BACKEND_URL: http://backend.mario-backend:5000
               MARIO_KAFKA_BOOTSTRAP_SERVERS: mario-cluster-kafka-bootstrap:9092
               UVICORN_PORT: &port 5000

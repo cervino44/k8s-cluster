@@ -6,4 +6,5 @@ resources:
   - ./harbor/ks.yaml
   - ./strimzi/ks.yaml
   - ./conduktor/ks.yaml
+  - ./redis/ks.yaml
 

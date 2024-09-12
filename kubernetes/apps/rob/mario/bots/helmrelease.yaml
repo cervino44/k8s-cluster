@@ -33,7 +33,7 @@ spec:
               repository: harbor.vegmond.net/dotzero24/mario-bots.webex
               tag: latest
             env:
-              MARIO_KV_host: redis-cluster-master.database
+              MARIO_KV_host: redis-cluster-master.mario-serivce
               MARIO_BACKEND_URL: http://backend.mario-backend:5000
               MARIO_PUBLIC_URL: https://rob.vegmond.net
               BOTS_PUBLIC_URL: https://rob.vegmond.net

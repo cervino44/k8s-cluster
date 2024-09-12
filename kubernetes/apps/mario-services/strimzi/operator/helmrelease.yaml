@@ -2,7 +2,7 @@
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
-  name: strimzi-operator
+  name: mario-service-strimzi-operator
 spec:
   interval: 30m
   chart:

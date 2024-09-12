@@ -33,7 +33,7 @@ spec:
               repository: harbor.vegmond.net/dotzero24/mario-message-forwarder
               tag: latest
             env:
-              MARIO_KV_host: redis-cluster-master.database
+              MARIO_KV_host: redis-cluster-master.mario-serivce
               MARIO_KAFKA_BOOTSTRAP_SERVERS: mario-cluster-kafka-bootstrap:9092
               UVICORN_PORT: &port 5000
               UVICORN_HOST: 0.0.0.0
