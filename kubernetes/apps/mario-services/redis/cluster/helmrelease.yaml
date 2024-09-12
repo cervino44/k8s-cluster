@@ -7,8 +7,7 @@ spec:
   interval: 30m
   chart:
     spec:
-      chart: redis-cluster
-#      version: 20.0.5
+      chart: redis
       sourceRef:
         kind: HelmRepository
         name: bitami
@@ -25,11 +24,19 @@ spec:
       defaultStorageClass: csi-rbd-sc
     usePassword: true
     password: '0123456789'
-    service:
-      type: LoadBalancer
-      loadBalancerSourceRanges:
-        - 192.168.23.0/24
-      annotations:
-        "coredns.io/hostname": "redis.vegmond.net"  
+    # service:
+    #   type: LoadBalancer
+    #   loadBalancerSourceRanges:
+    #     - 192.168.23.0/24
+    #   annotations:
+    #     "coredns.io/hostname": "redis.vegmond.net"  
+    master:
+      service:
+        type: LoadBalancer
+        loadBalancerSourceRanges:
+          - 192.168.23.0/24
+        annotations:
+          "cor`edns.io/hostname": "redis.vegmond.net"  
+
     metrics:
       enabled: true
