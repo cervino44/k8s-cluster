@@ -26,7 +26,7 @@ spec:
     #       - gitea.vegmond.net
 
     ## @param replicaCount number of replicas for the deployment
-    replicaCount: 3
+    replicaCount: 1
 
     ## @section strategy
     ## @param strategy.type strategy type
