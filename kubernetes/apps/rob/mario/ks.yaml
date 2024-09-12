@@ -19,9 +19,9 @@ spec:
   retryInterval: 1m
   timeout: 5m
   dependsOn: 
-    - kafka-cluster-rob
-    - mario-services-harbor
-    - mario-backend
+    - name: kafka-cluster-rob
+    - name: mario-services-harbor
+    - name: mario-backend
 ---
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
@@ -43,8 +43,8 @@ spec:
   retryInterval: 1m
   timeout: 5m
   dependsOn: 
-    - kafka-cluster-rob
-    - mario-services-harbor
-    - mario-backend
+    - name: kafka-cluster-rob
+    - name: mario-services-harbor
+    - name: mario-backend
 ---
 

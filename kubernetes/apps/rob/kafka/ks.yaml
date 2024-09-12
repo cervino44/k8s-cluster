@@ -19,7 +19,7 @@ spec:
   retryInterval: 1m
   timeout: 5m
   dependsOn: 
-    - strimzi-operator
+    - name: strimzi-operator
 ---
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
@@ -41,6 +41,6 @@ spec:
   retryInterval: 1m
   timeout: 5m
   dependsOn:
-    - strimzi-operator
+    - name: strimzi-operator
 ---
 

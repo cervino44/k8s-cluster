@@ -4,4 +4,6 @@ kind: Kustomization
 resources:
   - ./namespace.yaml
   - ./harbor/ks.yaml
+  - ./strimzi/ks.yaml
+  - ./conduktor/ks.yaml
 

@@ -19,6 +19,5 @@ spec:
   retryInterval: 1m
   timeout: 5m
   dependsOn:
-    - mario-postgres
-    - mario-services-harbor
-      
+    - name: mario-postgres
+    - name: mario-services-harbor
