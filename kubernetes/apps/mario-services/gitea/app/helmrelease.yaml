@@ -20,13 +20,13 @@ spec:
     remediation:
       retries: 3
   values:
-    global:
-      hostAliases: 
-        - hostnames:
-          - gitea.vegmond.net
+    # global:
+    #   hostAliases: 
+    #     - hostnames:
+    #       - gitea.vegmond.net
 
     ## @param replicaCount number of replicas for the deployment
-    replicaCount: 1
+    replicaCount: 3
 
     ## @section strategy
     ## @param strategy.type strategy type
