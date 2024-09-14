@@ -25,3 +25,4 @@ resources:
   - ./conduktor.yaml
   - ./github-runner.yaml
   - ./gitea.yaml
+  - ./enapter.yaml
