@@ -64,7 +64,7 @@ spec:
           storageClass: "csi-rbd-sc"
           subPath: ""
           accessMode: ReadWriteOnce
-          size: 64Gi
+          size: 260Gi
         jobservice:
           jobLog:
             storageClass: "csi-rbd-sc"
