@@ -8,5 +8,5 @@ resources:
   - ./conduktor/ks.yaml
   - ./redis/ks.yaml
   - ./gitea/ks.yaml
-  - ./devpi/ks.yaml
+  - ./proxpi/ks.yaml
 
