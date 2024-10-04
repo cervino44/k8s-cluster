@@ -4,4 +4,4 @@ kind: Kustomization
 resources:
   - ./namespace.yaml
   - ./kafka/ks.yaml
-  - ./mario/ks.yaml
+  # - ./mario/ks.yaml
