@@ -34,7 +34,10 @@ spec:
           tag: v0.2.4
         env:
           - name: UNIFI_HOST
-            value: https://192.168.23.1 # replace with the address to your UniFi router
+            valueFrom:
+              secretKeyRef:
+                name: external-dns-unifi-secret
+                key: url
           - name: UNIFI_USER
             valueFrom:
               secretKeyRef:
