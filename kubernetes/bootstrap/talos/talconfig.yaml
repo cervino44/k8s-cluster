@@ -71,6 +71,40 @@ nodes:
         mtu: 1500
         vip:
           ip: "192.168.23.2"
+  - hostname: "talos3"
+    ipAddress: "192.168.23.13"
+    installDisk: "/dev/sda"
+    talosImageURL: factory.talos.dev/installer/ce4c980550dd2ab1b17bbf2b08801c7eb59418eafe8f279833297925d67c7515
+    controlPlane: true
+    networkInterfaces:
+      - interface: eth0
+        dhcp: false
+        addresses:
+          - "192.168.23.13/24"
+        routes:
+          - network: 0.0.0.0/0
+            gateway: "192.168.23.1"
+        mtu: 1500
+        vip:
+          ip: "192.168.23.2"
+
+  - hostname: "talos4"
+    ipAddress: "192.168.23.14"
+    installDisk: "/dev/sda"
+    talosImageURL: factory.talos.dev/installer/ce4c980550dd2ab1b17bbf2b08801c7eb59418eafe8f279833297925d67c7515
+    controlPlane: true
+    networkInterfaces:
+      - interface: eth0
+        dhcp: false
+        addresses:
+          - "192.168.23.14/24"
+        routes:
+          - network: 0.0.0.0/0
+            gateway: "192.168.23.1"
+        mtu: 1500
+        vip:
+          ip: "192.168.23.2"
+
 
 # Global patches
 patches:

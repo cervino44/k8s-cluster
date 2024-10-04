@@ -1,6 +1,0 @@
-resources:
-  - config.yaml
-  - discovery.yaml
-  - service.yaml
-  - statefulset.yaml
-  - meshworker.yaml
