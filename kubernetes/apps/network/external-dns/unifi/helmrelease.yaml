@@ -65,11 +65,10 @@ spec:
     extraArgs:
       - --ignore-ingress-tls-spec
       - --ingress-class=internal
-      # - --ingress-class=external
-      # - --crd-source-apiversion=externaldns.k8s.io/v1alpha1
-      # - --crd-source-kind=DNSEndpoint
+      - --crd-source-apiversion=externaldns.k8s.io/v1alpha1
+      - --crd-source-kind=DNSEndpoint
     policy: sync
-    sources: ["ingress", "service"]
+    sources: ["ingress", "service", "crd"]
     txtOwnerId: default
     txtPrefix: k8s.
     domainFilters: ["${SECRET_DOMAIN}"]
