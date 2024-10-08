@@ -70,7 +70,7 @@ spec:
     registry: noop
     policy: sync
     sources: ["ingress", "service", "crd"]
-    txtOwnerId: default
+    txtOwnerId: internal
     txtPrefix: k8s.
     domainFilters: ["${SECRET_DOMAIN}"]
     serviceMonitor:
