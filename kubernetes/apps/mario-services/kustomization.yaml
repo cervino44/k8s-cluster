@@ -7,6 +7,6 @@ resources:
   - ./strimzi/ks.yaml
   - ./conduktor/ks.yaml
   - ./redis/ks.yaml
-  - ./gitea/ks.yaml
-  - ./proxpi/ks.yaml
+  # - ./gitea/ks.yaml
+  # - ./proxpi/ks.yaml
 

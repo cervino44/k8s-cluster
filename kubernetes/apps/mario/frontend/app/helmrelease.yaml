@@ -84,7 +84,6 @@ spec:
       app:
         className: internal
         hosts:
-#          - host: "backend.${SECRET_DOMAIN}"
           - host: "frontend.vegmond.net"
             paths:
               - path: "/"
