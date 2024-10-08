@@ -9,7 +9,7 @@ spec:
   commonMetadata:
     labels:
       app.kubernetes.io/name: *app
-  path: ./apps/mario-services/harbor/cluster
+  path: ./kubernetes/apps/mario-services/harbor/cluster
   prune: true
   sourceRef:
     kind: GitRepository
