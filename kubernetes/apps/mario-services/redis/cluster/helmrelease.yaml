@@ -24,19 +24,13 @@ spec:
       defaultStorageClass: csi-rbd-sc
     usePassword: true
     password: '0123456789'
-    # service:
-    #   type: LoadBalancer
-    #   loadBalancerSourceRanges:
-    #     - 192.168.23.0/24
-    #   annotations:
-    #     "coredns.io/hostname": "redis.vegmond.net"  
     master:
       service:
         type: LoadBalancer
         loadBalancerSourceRanges:
           - 192.168.23.0/24
         annotations:
-          "coredns.io/hostname": "redis.vegmond.net"  
-
+          "coredns.io/hostname": "redis.vegmond.net"
+          external-dns.alpha.kubernetes.io/hostname: redis.vegmond.net
     metrics:
       enabled: true
