@@ -52,13 +52,13 @@ spec:
             value: debug
         livenessProbe:
           httpGet:
-            path: /healthz
+            path: /
             port: http-webhook
           initialDelaySeconds: 10
           timeoutSeconds: 5
         readinessProbe:
           httpGet:
-            path: /readyz
+            path: /
             port: http-webhook
           initialDelaySeconds: 10
           timeoutSeconds: 5
