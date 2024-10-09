@@ -4,9 +4,9 @@ kind: Kustomization
 resources:
   - ./namespace.yaml
   # - ./harbor/ks.yaml
-  - ./strimzi/ks.yaml
-  - ./conduktor/ks.yaml
-  - ./redis/ks.yaml
+  # - ./strimzi/ks.yaml
+  # - ./conduktor/ks.yaml
+  # - ./redis/ks.yaml
   # - ./gitea/ks.yaml
   # - ./proxpi/ks.yaml
 
